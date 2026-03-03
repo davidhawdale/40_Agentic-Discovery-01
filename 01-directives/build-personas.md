@@ -2,13 +2,17 @@
 
 ## Goal
 
-Produce five fully-formed Dynamic Persona profiles — one per archetype — each grounded explicitly in transcript evidence, following the standard persona template, and meeting set-level diversity requirements.
+Produce five fully formed Dynamic Persona profiles, one per archetype, grounded in transcript evidence and suitable for product and experience teams to evaluate ideas against realistic user needs and behaviours.
 
 ## Context
 
 > From `00-brief/product-vision.md`: An AI assistant that people choose to use daily for their personal needs — not because they have to, but because it consistently delivers value, earns their trust, and fits seamlessly into their lives.
 
-With archetypes defined, this workflow gives each archetype a human identity: a name, backstory, needs, behaviours, pain points, and verbatim quotes. The five personas are the primary deliverable for teams wanting to pressure-test product ideas.
+With archetypes defined, this workflow turns each archetype into a human-centered persona with a clear identity, motivations, behaviours, pain points, and evidence-backed voice. The persona set is used to pressure-test concepts, messaging, and prioritisation decisions.
+
+## Strategic Success Criteria
+
+The persona set should help teams make better product decisions by representing a meaningful spread of user realities and linking those realities to the project vision in `00-brief/`. Personas should be usable as decision-making tools, not just descriptive profiles.
 
 ## Inputs
 
@@ -23,18 +27,23 @@ With archetypes defined, this workflow gives each archetype a human identity: a 
 
 ## Outputs
 
-| Output | Location |
-|--------|----------|
-| 5 Dynamic Persona profiles | `05-outputs/build-personas/personas/` |
+The outputs produced: five final persona documents for the archetype set (for example, files under `05-outputs/build-personas/personas/`).
+
+## Out of Scope
+
+- Redefining or re-clustering archetypes
+- Translating transcripts or generating new source extracts
+- Changing the core persona template structure
+- Producing implementation plans, feature specs, or solution designs
+
+## Acceptance Criteria
+
+1. Five persona profiles are produced, one per archetype.
+2. Each persona is clearly grounded in source evidence and reflects its assigned archetype.
+3. The persona set is diverse enough to represent materially different user profiles and needs.
+4. Outputs are suitable for downstream product discussion and decision-making.
+5. The deliverables are saved to the expected final output location for this workflow.
 
 ## Workflow
 
-`02-workflows/build-personas/`
-
-## Success Criteria
-
-- 5 persona files produced, one per archetype
-- Each persona follows the standard template headings exactly
-- Each persona includes exactly 2 verbatim quotes in the Key Quotes section
-- Personas pass structural and diversity validation
-- The set covers a range of ages, genders, personality types, pain point severities, and attitudes toward the product
+See `02-workflows/build-personas/` for the detailed process.

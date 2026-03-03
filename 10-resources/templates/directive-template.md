@@ -1,4 +1,4 @@
-# {Directive Name}
+# Directive Template
 
 ## Goal
 
@@ -16,9 +16,17 @@
 
 {What the user provides or what gets passed in when the workflow runs. List each input with a brief description.}
 
+## Outputs
+
+{The outputs produced. Name expected final output files where helpful (e.g., `research-question-analysis.md`) without specifying orchestration/process internals.}
+
+## Out of Scope
+
+{What this workflow is not intended to do. Keep this at a high level so boundaries are clear.}
+
 ## Acceptance Criteria
 
-{Numbered list of conditions that must all be met for the output to be considered complete. These should be specific enough to validate against — the orchestration file will use them for quality checks.}
+{Numbered list of conditions that must all be met for the output to be considered complete. Keep criteria high level and outcome-focused.}
 
 ## Workflow
 

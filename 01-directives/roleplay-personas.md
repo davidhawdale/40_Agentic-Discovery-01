@@ -2,19 +2,23 @@
 
 ## Goal
 
-Build a deterministic role-play pack from the five Dynamic Personas, then launch a local web app so teams can ask questions and receive grounded in-character responses from all five personas simultaneously.
+Create a role-play persona pack from the Dynamic Personas so teams can run grounded multi-persona sessions that surface realistic reactions, objections, and priorities for product decisions.
 
 ## Context
 
 > From `00-brief/product-vision.md`: An AI assistant that people choose to use daily for their personal needs — not because they have to, but because it consistently delivers value, earns their trust, and fits seamlessly into their lives.
 
-With personas created, this workflow makes them interactive. Teams can use the role-play app to pressure-test ideas, explore reactions, and surface realistic objections — all grounded in real transcript evidence.
+With personas created, this workflow makes them interactive and usable in collaborative decision-making contexts. Teams use these sessions to pressure-test ideas, explore trade-offs, and identify likely user responses while staying anchored to interview evidence.
+
+## Strategic Success Criteria
+
+This workflow should help teams evaluate concepts against realistic user perspectives, not abstract assumptions. Outputs should make persona evidence easy to apply in live discussion and support better product choices aligned with the project vision.
 
 ## Inputs
 
 | Input | Location |
 |-------|----------|
-| Persona files | `04-process/build-personas/personas/*.md` |
+| Persona files | `05-outputs/build-personas/personas/*.md` |
 | Archetype input packs | `04-process/build-personas/persona-inputs/archetype-*.json` |
 | Consolidated quotes | `04-process/extract-and-tag-quotes/p4-consolidate-tags/consolidated-quotes.csv` |
 | Contradictions | `04-process/extract-and-tag-quotes/p3-check-contradictions/contradictions.csv` |
@@ -30,13 +34,21 @@ With personas created, this workflow makes them interactive. Teams can use the r
 | Role-play session pack | `05-outputs/roleplay-personas/session-pack.json` |
 | Session runbook | `05-outputs/roleplay-personas/session-runbook.md` |
 
+## Out of Scope
+
+- Creating new personas or redefining archetypes
+- Re-running quote extraction or contradiction analysis
+- Producing product-roadmap decisions or prioritisation outputs directly
+- Replacing human judgement with automated recommendations
+
+## Acceptance Criteria
+
+1. A complete session pack is produced for the five-persona panel.
+2. Persona responses are grounded in the underlying research evidence base.
+3. Persona voices are meaningfully differentiated and suitable for panel-style discussion.
+4. The runbook provides clear guidance for teams to run repeatable role-play sessions.
+5. Outputs are usable for downstream concept evaluation and product conversation.
+
 ## Workflow
 
-`02-workflows/roleplay-personas/`
-
-## Success Criteria
-
-- Session pack contains exactly 5 personas with evidence references and contradiction metadata
-- App starts successfully and responds to panel questions
-- Every model response passes verifier validation before being returned to the user
-- Teams can run grounded panel sessions with realistic, differentiated persona voices
+See `02-workflows/roleplay-personas/` for the detailed process.

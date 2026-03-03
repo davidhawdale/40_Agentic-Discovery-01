@@ -2,15 +2,17 @@
 
 ## Goal
 
-Extract verbatim quotes from every interview transcript, tag each with a memorable label, severity, sentiment, and question reference. Identify internal contradictions per participant. Consolidate the raw tags to a canonical set of around 40 labels.
-
-These outputs are the evidential foundation for all downstream persona workflows.
+Extract evidence-rich interview quotes and organise them into a usable tagged dataset, including participant-level contradictions, so downstream workflows can reliably synthesise archetypes and personas.
 
 ## Context
 
 > From `00-brief/product-vision.md`: An AI assistant that people choose to use daily for their personal needs — not because they have to, but because it consistently delivers value, earns their trust, and fits seamlessly into their lives.
 
-The raw transcripts contain rich qualitative insight. This workflow extracts, validates, and organises that insight so it can be reliably used for archetype synthesis and persona creation.
+The raw transcripts contain high-value qualitative insight, but that insight must be structured before it can drive consistent downstream analysis. This workflow turns raw transcript material into a clear evidence base for subsequent interpretation and synthesis.
+
+## Strategic Success Criteria
+
+This workflow should produce a dependable evidence foundation that helps later stages represent real user motivations, friction points, and trust/value dynamics in line with the product vision. The output should improve decision quality by making source-backed signals easy to reuse.
 
 ## Inputs
 
@@ -27,14 +29,21 @@ The raw transcripts contain rich qualitative insight. This workflow extracts, va
 | Participant contradictions | `05-outputs/extract-and-tag-quotes/contradictions.csv` |
 | Tag consolidation report | `05-outputs/extract-and-tag-quotes/tag-consolidation-report.md` |
 
+## Out of Scope
+
+- Synthesising archetypes or generating personas
+- Producing product recommendations or prioritisation decisions
+- Redefining downstream workflow outputs or templates
+- Interpreting findings beyond evidence extraction and organisation
+
+## Acceptance Criteria
+
+1. A complete, reusable quote evidence set is produced from the interview corpus.
+2. All quotes pass verbatim validation (exact match in source transcript).
+3. Participant-level contradiction signals are captured as part of the evidence base.
+4. Consolidated tag count is between 35 and 45.
+5. No over-broad catch-all tags and no dominant mega-tags.
+
 ## Workflow
 
-`02-workflows/extract-and-tag-quotes/`
-
-## Success Criteria
-
-- Every participant has at least one extracted quote
-- All quotes pass verbatim validation (exact match in source transcript)
-- Contradictions are identified and documented per participant
-- Consolidated tag count is between 35 and 45
-- No over-broad catch-all tags; no dominant mega-tags
+See `02-workflows/extract-and-tag-quotes/` for the detailed process.

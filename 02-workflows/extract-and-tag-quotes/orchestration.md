@@ -179,6 +179,20 @@ Then ask:
 
 Do not proceed until the user explicitly says yes.
 
+## Acceptance Criteria Traceability (Directive -> Checks)
+
+This section is the executable linkage between directive-level outcomes and workflow-level verification.
+
+Map each directive acceptance criterion to the exact orchestration checks that enforce it.
+
+| Directive Acceptance Criterion | Where Enforced in Workflow | Enforcement Mechanism |
+|---|---|---|
+| Every participant has at least one extracted quote | Phase 1 (`verify-quote-extracts-completion.py`) | Verifies manifest participants are present in `p1-quote-extraction/quotes.csv`; FAIL if any participant is missing. |
+| All quotes pass verbatim validation (exact match in source transcript) | Phase 2 (`validate-quotes.py`) + Phase 2 Human Review Gate | Produces per-quote PASS/FAIL report; workflow pauses for user review before proceeding. |
+| Contradictions are identified and documented per participant | Phase 3 (`verify-contradictions-completion.py` + `merge-contradictions.py`) | Verifies per-participant contradiction part coverage and merges into consolidated contradictions output. |
+| Consolidated tag count is between 35 and 45 | Phase 4 (`run-tag-consolidation.py` + `verify-tag-consolidation.py`) | Enforces hard unique-tag bounds and fails if outside range. |
+| No over-broad catch-all tags; no dominant mega-tags | Phase 4 (`run-tag-consolidation.py` + `verify-tag-consolidation.py`) | Applies semantic quality checks for catch-all markers and dominant-tag ratio limits; FAIL on violation. |
+
 ### Final Step: Copy Outputs
 
 After the user confirms Phase 4 is complete and satisfactory, copy the final deliverables to `05-outputs/extract-and-tag-quotes/`:

@@ -32,6 +32,21 @@ If a phase has branching outcomes, include a compact decision table:
 
 {Optional: workflow-specific context sections (e.g., "Language Detection") — include only if the process steps need reference material to make sense.}
 
+## Acceptance Criteria Traceability (Directive -> Checks)
+
+Use this section for directive workflows to map each directive acceptance criterion to concrete workflow checks.
+
+| Directive Acceptance Criterion | Where Enforced in Workflow | Enforcement Mechanism |
+|---|---|---|
+| {Criterion from `01-directives/{name}.md`} | {Phase N + command/agent} | {How PASS/FAIL is determined} |
+| {Criterion from `01-directives/{name}.md`} | {Phase N + command/agent} | {How PASS/FAIL is determined} |
+
+Rules:
+- Include one row per directive acceptance criterion.
+- Reference exact phase labels and exact script/agent names.
+- Keep mechanism text concrete and testable (what causes FAIL/WARN/PASS).
+- Do not restate directive wording only; show enforcement linkage.
+
 ## Tools
 
 - `02-workflows/{name}/{script}.py` — {what it does}
