@@ -8,182 +8,193 @@ Extract verbatim quotes from every interview transcript, tag each with a memorab
 
 The outputs of this workflow are the evidential foundation for all downstream persona and roleplay workflows.
 
+## Preconditions
+
+- Required inputs:
+  - `03-inputs/interview-transcripts/`
+  - `03-inputs/research-brief.md`
+- Expected counts/shape:
+  - Non-empty transcript set
+  - Transcript filenames follow recognized patterns for manifest generation (`en_participant_####.txt` and `en_translated_from_{lang}_participant_####.txt`)
+- Stop conditions:
+  - Missing or empty transcript directory
+  - Missing research brief
+  - `prepare.py` fails to generate `p0-prepare/manifest.json`
+
 ## Process
 
 ### Phase 0: Prepare
 
 - Goal: Validate inputs and build a manifest of all transcripts to process.
-- Run: `python3 02-workflows/extract-and-tag-quotes/prepare.py`
-- Paths:
-  - Transcripts in: `03-inputs/interview-transcripts/`
-  - Research brief in: `03-inputs/research-brief.md`
-  - Manifest out: `04-process/extract-and-tag-quotes/p0-prepare/manifest.json`
-- Input: Files in `03-inputs/interview-transcripts/`, research brief
-- Output: `p0-prepare/manifest.json` with transcript count, file paths, and language flags
-- If fail: Check `03-inputs/` structure; ensure transcripts are in expected format
+- Run:
+  1. `python3 02-workflows/extract-and-tag-quotes/prepare.py`
+- Input:
+  - Files in `03-inputs/interview-transcripts/`
+  - `03-inputs/research-brief.md`
+- Output:
+  - `04-process/extract-and-tag-quotes/p0-prepare/manifest.json` (transcript count, transcript metadata, brief path, warnings)
+- PASS when:
+  - Manifest file is written successfully
+- WARN when:
+  - Input count/shape warnings are emitted but manifest is still written
+- FAIL when:
+  - Required inputs are missing
+  - Manifest is not written
+- If fail:
+  - Check `03-inputs/` structure and filenames, correct inputs, then apply retry policy
 
 ### Phase 1: Extract Quotes
 
-- Goal: Extract notable quotes from each transcript; tag each with a memorable label, severity rating, sentiment, and question reference
-- Input: Each transcript entry from `p0-prepare/manifest.json`
-- Spawn all `transcript-quote-extractor` sub-agents in parallel — one per transcript — each with these values in the task prompt:
-  - `participant_id` — from manifest
-  - `transcript_id` — from manifest (`id` field)
-  - `transcript_path` — full path to the transcript file (from manifest `path` field, resolved from project root)
-  - `output_path` — `04-process/extract-and-tag-quotes/p1-quote-extraction/quote-parts/{participant_id}.csv`
-- Output: One CSV part file per transcript in `04-process/extract-and-tag-quotes/p1-quote-extraction/quote-parts/`
-- Merge: `python3 02-workflows/extract-and-tag-quotes/merge-quotes.py`
-- Validate completeness: `python3 02-workflows/extract-and-tag-quotes/verify-quote-extracts-completion.py`
-- If fail: Re-run the failed agent with a specific correction instruction; if second fail, skip and log WARN
+- Goal: Extract notable quotes from each transcript and tag each with label, severity, sentiment, and question reference.
+- Run:
+  1. Run `transcript-quote-extractor` for each transcript in manifest (run all participants in parallel)
+  2. `python3 02-workflows/extract-and-tag-quotes/merge-quotes.py`
+  3. `python3 02-workflows/extract-and-tag-quotes/verify-quote-extracts-completion.py`
+- Input:
+  - `04-process/extract-and-tag-quotes/p0-prepare/manifest.json`
+- Output:
+  - `04-process/extract-and-tag-quotes/p1-quote-extraction/quote-parts/{participant_id}.csv`
+  - `04-process/extract-and-tag-quotes/p1-quote-extraction/quotes.csv`
+- PASS when:
+  - `quotes.csv` is produced
+  - Completion verification passes for all manifest participants
+- WARN when:
+  - Non-blocking row-level issues are logged but participant coverage remains complete
+- FAIL when:
+  - Quote extraction or merge fails
+  - Completion verification reports missing participants
+- If fail:
+  - Apply retry policy with specific correction instructions to failed participant(s)/step
 
 ### Phase 2: Validate Quotes
 
-- Goal: Confirm every extracted quote is verbatim — no paraphrasing.
-- Run: `python3 02-workflows/extract-and-tag-quotes/validate-quotes.py`
-- Input: `p1-quote-extraction/quotes.csv` + `p0-prepare/manifest.json` (for transcript paths)
-- Output: `p2-validate-quotes/quote-validation-report.csv` (status, reason, transcript_match, transcript_lines per quote)
-- If FAIL: quote was paraphrased — re-run that participant's extractor with explicit instruction to copy text verbatim; if second fail, flag for human review
+- Goal: Confirm every extracted quote is verbatim (no paraphrasing).
+- Run:
+  1. `python3 02-workflows/extract-and-tag-quotes/validate-quotes.py`
+- Input:
+  - `04-process/extract-and-tag-quotes/p1-quote-extraction/quotes.csv`
+  - `04-process/extract-and-tag-quotes/p0-prepare/manifest.json`
+- Output:
+  - `04-process/extract-and-tag-quotes/p2-validate-quotes/quote-validation-report.csv`
+- PASS when:
+  - Validation report is generated and all rows pass
+- WARN when:
+  - Validation report is generated with limited failures that user chooses to defer after gate review
+- FAIL when:
+  - Validation script fails to run
+  - Report cannot be produced
+- If fail:
+  - Apply retry policy; for paraphrase failures, re-run affected participant extractor(s) with explicit verbatim instruction
 
 ### Phase 2 Gate: Human Review — HARD STOP
 
 **Always stop here. Do not continue without explicit user confirmation.**
 
-After Phase 2 completes, read `p2-validate-quotes/quote-validation-report.csv` and present a summary:
-
-```
-Phase 2 complete — Quote Validation Summary
-───────────────────────────────────────────
-Total quotes:   N
-Passed:         N
-Failed:         N
-
-[If failures > 0, list each:]
-  FAIL  [tag]  participant: [id]  reason: [reason]
-
-[If failures = 0:]
-  All quotes passed verbatim check.
-```
-
-Then ask:
-
-- **If failures > 0:** "There are [N] failed quotes. Would you like to go back and re-run the affected participant(s) before continuing, or continue to the next phase anyway?"
-- **If failures = 0:** "All quotes passed. Ready to continue to the next phase?"
-
-Do not proceed to the next phase until the user explicitly says yes.
+- Trigger:
+  - Phase 2 completes and validation report exists
+- Read:
+  - `04-process/extract-and-tag-quotes/p2-validate-quotes/quote-validation-report.csv`
+- Summarise:
+  - Total quotes
+  - PASS/FAIL counts
+  - Failed rows with participant/tag/reason (if any)
+- Ask user:
+  - If failures > 0: "There are [N] failed quotes. Would you like to go back and re-run the affected participant(s) before continuing, or continue to the next phase anyway?"
+  - If failures = 0: "All quotes passed. Ready to continue to the next phase?"
+- Stop rule:
+  - Do not proceed until user explicitly confirms.
 
 ### Phase 3: Check for Contradictions
 
-- Goal: For each participant, identify where their quotes contradict each other. Apply the rules in `.claude/rules/contradiction-rules.md`.
-- Input: `p1-quote-extraction/quotes.csv` (all validated quotes) + `p0-prepare/manifest.json` (for participant list)
-- Sequence:
-  1. Run `participant-contradiction-checker` per participant.
-  2. Run `python3 02-workflows/extract-and-tag-quotes/verify-contradictions-completion.py`.
-  3. Run `python3 02-workflows/extract-and-tag-quotes/merge-contradictions.py`.
-  4. Run the Phase 3 Human Review Gate summary and stop for user confirmation.
-- Spawn all `participant-contradiction-checker` sub-agents in parallel — one per participant — each with:
-  - `participant_id` — from manifest
-  - `transcript_id` — from manifest (`id` field)
-  - `quotes_path` — full path to `p1-quote-extraction/quotes.csv`
-  - `output_path` — `04-process/extract-and-tag-quotes/p3-check-contradictions/contradiction-parts/{participant_id}.csv`
-- In Codex/OpenAI, "spawn sub-agent" means: read `.claude/agents/participant-contradiction-checker.md` and execute those instructions inline for each participant.
-- Output: One CSV part file per participant in `04-process/extract-and-tag-quotes/p3-check-contradictions/contradiction-parts/` (empty CSV with header if no contradictions)
-- Verify completion: `python3 02-workflows/extract-and-tag-quotes/verify-contradictions-completion.py`
-- Merge: `python3 02-workflows/extract-and-tag-quotes/merge-contradictions.py`
-- If fail: Re-run the failed agent once with a specific correction instruction; if second fail, skip and log WARN
+- Goal: Identify where each participant's quotes contradict each other using contradiction rules.
+- Run:
+  1. Run `participant-contradiction-checker` for each participant in manifest (run all participants in parallel)
+  2. `python3 02-workflows/extract-and-tag-quotes/verify-contradictions-completion.py`
+  3. `python3 02-workflows/extract-and-tag-quotes/merge-contradictions.py`
+- Input:
+  - `04-process/extract-and-tag-quotes/p1-quote-extraction/quotes.csv`
+  - `04-process/extract-and-tag-quotes/p0-prepare/manifest.json`
+- Output:
+  - `04-process/extract-and-tag-quotes/p3-check-contradictions/contradiction-parts/{participant_id}.csv`
+  - `04-process/extract-and-tag-quotes/p3-check-contradictions/contradictions.csv`
+- PASS when:
+  - Completion verification passes for all participants
+  - Merged contradictions file is produced
+- WARN when:
+  - No contradictions found for all participants (valid outcome)
+  - Non-blocking issues are logged and reviewed
+- FAIL when:
+  - Completion verification fails
+  - Merge step fails
+- If fail:
+  - Apply retry policy with specific correction instructions
 
 ### Phase 3 Gate: Human Review — HARD STOP
 
 **Always stop here. Do not continue without explicit user confirmation.**
 
-After Phase 3 completes, read:
-
-- `04-process/extract-and-tag-quotes/p0-prepare/manifest.json`
-- `04-process/extract-and-tag-quotes/p3-check-contradictions/contradictions.csv`
-
-Present a summary:
-
-```
-Phase 3 complete — Contradiction Check Summary
-──────────────────────────────────────────────
-Participants checked:             N
-Participants with contradictions: N
-Total contradictions found:       N
-
-[If contradictions found:]
-  Detailed results: 04-process/extract-and-tag-quotes/p3-check-contradictions/contradictions.csv
-  Use this file for participant-level contradiction details and quote pairs.
-
-[If none:]
-  No contradictions found across all participants.
-```
-
-Then ask:
-
-- **If contradictions found:** "There are [N] contradictions across [N] participants. Please review 04-process/extract-and-tag-quotes/p3-check-contradictions/contradictions.csv. Would you like to re-run any participants before continuing?"
-- **If none:** "No contradictions found. Ready to continue to the next phase?"
-
-Do not proceed to the next phase until the user explicitly says yes.
+- Trigger:
+  - Phase 3 completes and contradictions output is available
+- Read:
+  - `04-process/extract-and-tag-quotes/p0-prepare/manifest.json`
+  - `04-process/extract-and-tag-quotes/p3-check-contradictions/contradictions.csv`
+- Summarise:
+  - Participants checked
+  - Participants with contradictions
+  - Total contradictions found
+- Ask user:
+  - If contradictions found: "There are [N] contradictions across [N] participants. Please review 04-process/extract-and-tag-quotes/p3-check-contradictions/contradictions.csv. Would you like to re-run any participants before continuing?"
+  - If none: "No contradictions found. Ready to continue to the next phase?"
+- Stop rule:
+  - Do not proceed until user explicitly confirms.
 
 ### Phase 4: Consolidate the Quote Tags
 
-- Goal: Consolidate `p1` quote tags to a canonical set of around 40 tags (hard range 35-45) without changing quote text.
+- Goal: Consolidate Phase 1 quote tags to a canonical set around 40 tags (hard range 35-45) without changing quote text.
+- Run:
+  1. Run `tag-consolidator` to produce mapping
+  2. `python3 02-workflows/extract-and-tag-quotes/run-tag-consolidation.py`
+  3. `python3 02-workflows/extract-and-tag-quotes/verify-tag-consolidation.py`
 - Input:
   - `04-process/extract-and-tag-quotes/p1-quote-extraction/quotes.csv`
-- Sequence:
-  1. Build tag mapping with `tag-consolidator`.
-  2. Run `python3 02-workflows/extract-and-tag-quotes/run-tag-consolidation.py`.
-  3. Run `python3 02-workflows/extract-and-tag-quotes/verify-tag-consolidation.py`.
-  4. Run the Phase 4 Human Review Gate summary and stop for user confirmation.
-- For consolidation mapping, spawn a `tag-consolidator` sub-agent with:
-  - `quotes_path` — full path to `p1-quote-extraction/quotes.csv`
-  - `output_mapping_path` — `04-process/extract-and-tag-quotes/p4-consolidate-tags/tag-mapping.json`
-- In Codex/OpenAI, "spawn sub-agent" means: read `.claude/agents/tag-consolidator.md` and execute those instructions inline.
 - Output:
-  - `04-process/extract-and-tag-quotes/p4-consolidate-tags/consolidated-quotes.csv` (all original quote rows + `consolidated_tag`)
-  - `04-process/extract-and-tag-quotes/p4-consolidate-tags/tag-crosswalk.csv` (original tag to consolidated tag mapping)
-  - `04-process/extract-and-tag-quotes/p4-consolidate-tags/tag-consolidation-report.md` (summary and distribution)
-- Constraints:
-  - Do not overwrite `p1-quote-extraction/quotes.csv`
-  - Do not alter any `quote` text in output rows
-  - Enforce semantic quality first (no over-broad catch-all buckets, avoid pass-through mapping, avoid dominant mega-buckets)
-  - Only after semantic quality passes, enforce consolidated unique tag count between 35 and 45
-- If fail: Re-run the failed agent/script once with a specific correction instruction; if second fail, skip and log WARN
+  - `04-process/extract-and-tag-quotes/p4-consolidate-tags/tag-mapping.json`
+  - `04-process/extract-and-tag-quotes/p4-consolidate-tags/consolidated-quotes.csv`
+  - `04-process/extract-and-tag-quotes/p4-consolidate-tags/tag-crosswalk.csv`
+  - `04-process/extract-and-tag-quotes/p4-consolidate-tags/tag-consolidation-report.md`
+- PASS when:
+  - Consolidation and verification steps pass
+  - Unique consolidated tag count is between 35 and 45
+- WARN when:
+  - Non-blocking quality notes are logged and reviewed
+- FAIL when:
+  - Verification fails on tag-count bounds or semantic quality constraints
+  - Consolidation outputs are missing or malformed
+- If fail:
+  - Apply retry policy with specific correction instructions
 
 ### Phase 4 Gate: Human Review — HARD STOP
 
 **Always stop here. Do not continue without explicit user confirmation.**
 
-After Phase 4 completes, read:
-
-- `04-process/extract-and-tag-quotes/p4-consolidate-tags/consolidated-quotes.csv`
-- `04-process/extract-and-tag-quotes/p4-consolidate-tags/tag-consolidation-report.md`
-
-Present a summary:
-
-```
-Phase 4 complete — Tag Consolidation Summary
-────────────────────────────────────────────
-Total quotes:              N
-Original unique tags:      N
-Consolidated unique tags:  N
-
-Detailed results:
-  04-process/extract-and-tag-quotes/p4-consolidate-tags/tag-consolidation-report.md
-  04-process/extract-and-tag-quotes/p4-consolidate-tags/consolidated-quotes.csv
-```
-
-Then ask:
-
-- **If validation passes:** "Phase 4 passed. Please review the report and consolidated quotes output. Ready to copy outputs and complete this workflow?"
-- **If validation fails:** "Phase 4 has validation failures. Would you like to re-run consolidation with correction instructions?"
-
-Do not proceed until the user explicitly says yes.
+- Trigger:
+  - Phase 4 completes with consolidated outputs and report
+- Read:
+  - `04-process/extract-and-tag-quotes/p4-consolidate-tags/consolidated-quotes.csv`
+  - `04-process/extract-and-tag-quotes/p4-consolidate-tags/tag-consolidation-report.md`
+- Summarise:
+  - Total quotes
+  - Original unique tags
+  - Consolidated unique tags
+- Ask user:
+  - If validation passes: "Phase 4 passed. Please review the report and consolidated quotes output. Ready to copy outputs and complete this workflow?"
+  - If validation fails: "Phase 4 has validation failures. Would you like to re-run consolidation with correction instructions?"
+- Stop rule:
+  - Do not proceed until user explicitly confirms.
 
 ## Acceptance Criteria Traceability (Directive -> Checks)
 
-This section is the executable linkage between directive-level outcomes and workflow-level verification.
-
-Map each directive acceptance criterion to the exact orchestration checks that enforce it.
+Use this section for directive workflows to map each directive acceptance criterion to concrete workflow checks.
 
 | Directive Acceptance Criterion | Where Enforced in Workflow | Enforcement Mechanism |
 |---|---|---|
@@ -192,6 +203,69 @@ Map each directive acceptance criterion to the exact orchestration checks that e
 | Contradictions are identified and documented per participant | Phase 3 (`verify-contradictions-completion.py` + `merge-contradictions.py`) | Verifies per-participant contradiction part coverage and merges into consolidated contradictions output. |
 | Consolidated tag count is between 35 and 45 | Phase 4 (`run-tag-consolidation.py` + `verify-tag-consolidation.py`) | Enforces hard unique-tag bounds and fails if outside range. |
 | No over-broad catch-all tags; no dominant mega-tags | Phase 4 (`run-tag-consolidation.py` + `verify-tag-consolidation.py`) | Applies semantic quality checks for catch-all markers and dominant-tag ratio limits; FAIL on violation. |
+
+## Retry Policy
+
+- `WARN`: Log and continue.
+- `FAIL` (first): Re-run once with specific correction.
+- `FAIL` (second): Stop and report failure context for human decision.
+
+## Tools
+
+- `02-workflows/extract-and-tag-quotes/prepare.py` — validates inputs and writes manifest.
+- `02-workflows/extract-and-tag-quotes/merge-quotes.py` — merges per-participant quote parts into `quotes.csv`.
+- `02-workflows/extract-and-tag-quotes/verify-quote-extracts-completion.py` — verifies participant coverage in quote extraction.
+- `02-workflows/extract-and-tag-quotes/validate-quotes.py` — checks verbatim quote matching against transcripts.
+- `02-workflows/extract-and-tag-quotes/verify-contradictions-completion.py` — verifies per-participant contradiction part coverage and schema.
+- `02-workflows/extract-and-tag-quotes/merge-contradictions.py` — merges contradiction parts into `contradictions.csv`.
+- `02-workflows/extract-and-tag-quotes/run-tag-consolidation.py` — applies mapping to produce consolidated tag outputs.
+- `02-workflows/extract-and-tag-quotes/verify-tag-consolidation.py` — validates tag consolidation integrity and semantic guardrails.
+- `transcript-quote-extractor` sub-agent — extracts and tags verbatim quotes per transcript.
+- `participant-contradiction-checker` sub-agent — identifies contradiction signals per participant.
+- `tag-consolidator` sub-agent — generates tag mapping for consolidation.
+
+## Manifest Format
+
+`04-process/extract-and-tag-quotes/p0-prepare/manifest.json`:
+
+- `transcript_count` (integer)
+- `research_brief_path` (string)
+- `warnings` (string list)
+- `transcripts` (array), each item includes:
+  - `id` (transcript id)
+  - `participant_id` (participant key used across phases)
+  - `path` (relative transcript file path)
+  - `language` (current transcript language)
+  - `source_language` (original language for translated transcripts, else `null`)
+  - `translated` (boolean)
+  - `size_bytes` (integer)
+
+## Sub-agent Parameters
+
+### `transcript-quote-extractor`
+
+- `participant_id` — from manifest `transcripts[].participant_id`
+- `transcript_id` — from manifest `transcripts[].id`
+- `transcript_path` — from manifest `transcripts[].path` resolved from project root
+- `output_path` — `04-process/extract-and-tag-quotes/p1-quote-extraction/quote-parts/{participant_id}.csv`
+
+### `participant-contradiction-checker`
+
+- `participant_id` — from manifest `transcripts[].participant_id`
+- `transcript_id` — from manifest `transcripts[].id`
+- `quotes_path` — `04-process/extract-and-tag-quotes/p1-quote-extraction/quotes.csv`
+- `output_path` — `04-process/extract-and-tag-quotes/p3-check-contradictions/contradiction-parts/{participant_id}.csv`
+
+### `tag-consolidator`
+
+- `quotes_path` — `04-process/extract-and-tag-quotes/p1-quote-extraction/quotes.csv`
+- `output_mapping_path` — `04-process/extract-and-tag-quotes/p4-consolidate-tags/tag-mapping.json`
+
+## Output Promotion
+
+- Process artifacts remain in `04-process/extract-and-tag-quotes/`.
+- Final deliverables are promoted to `05-outputs/extract-and-tag-quotes/`.
+- Do not overwrite existing `05-outputs/extract-and-tag-quotes/` files without explicit user confirmation.
 
 ### Final Step: Copy Outputs
 
@@ -205,6 +279,15 @@ cp 04-process/extract-and-tag-quotes/p4-consolidate-tags/tag-consolidation-repor
 ```
 
 Confirm files are present, then report workflow complete.
+
+## Completion Checklist (Run-End Acceptance Gate)
+
+- [ ] Preconditions satisfied (or explicitly resolved)
+- [ ] All directive acceptance criteria are mapped in traceability table
+- [ ] All mapped checks reached required PASS/WARN state
+- [ ] Final files exist in `05-outputs/extract-and-tag-quotes/`
+- [ ] User-facing summary includes counts, issues, and final status
+- [ ] Run log entry appended (if workflow logging is enabled)
 
 ---
 
