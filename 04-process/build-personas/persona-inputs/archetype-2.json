@@ -36,20 +36,20 @@
     }
   ],
   "participant_extract_files": [
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/1.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/2.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/6.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/7.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/14.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/17.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/18.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/39.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/45.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/48.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/51.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/DE7.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/PL17.md"
+    "04-process/synthesise-archetypes/extracts/1.md",
+    "04-process/synthesise-archetypes/extracts/2.md",
+    "04-process/synthesise-archetypes/extracts/6.md",
+    "04-process/synthesise-archetypes/extracts/7.md",
+    "04-process/synthesise-archetypes/extracts/14.md",
+    "04-process/synthesise-archetypes/extracts/17.md",
+    "04-process/synthesise-archetypes/extracts/18.md",
+    "04-process/synthesise-archetypes/extracts/39.md",
+    "04-process/synthesise-archetypes/extracts/45.md",
+    "04-process/synthesise-archetypes/extracts/48.md",
+    "04-process/synthesise-archetypes/extracts/51.md",
+    "04-process/synthesise-archetypes/extracts/DE7.md",
+    "04-process/synthesise-archetypes/extracts/PL17.md"
   ],
   "template_file": "10-resources/templates/persona-template.md",
-  "output_file": "04-process/build-dynamic-personas/p6-create-personas/personas/luca-brenner.md"
+  "output_file": "04-process/build-personas/personas/luca-brenner.md"
 }

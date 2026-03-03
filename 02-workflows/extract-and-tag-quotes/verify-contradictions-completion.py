@@ -5,7 +5,7 @@ Checks that every participant in the manifest has a contradiction part CSV and
 that each row follows the Phase 3 contradiction contract.
 
 Usage:
-    python3 02-workflows/build-dynamic-personas/verify-contradictions-completion.py
+    python3 02-workflows/extract-and-tag-quotes/verify-contradictions-completion.py
 
 Exit codes:
     0 — PASS
@@ -20,8 +20,8 @@ from pathlib import Path
 # ── Paths ───────────────────────────────────────────────────────────────────────
 
 ROOT = Path(__file__).resolve().parents[2]
-MANIFEST_PATH = ROOT / "04-process" / "build-dynamic-personas" / "p0-prepare" / "manifest.json"
-PHASE3_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p3-check-contradictions"
+MANIFEST_PATH = ROOT / "04-process" / "extract-and-tag-quotes" / "p0-prepare" / "manifest.json"
+PHASE3_DIR = ROOT / "04-process" / "extract-and-tag-quotes" / "p3-check-contradictions"
 PARTS_DIR = PHASE3_DIR / "contradiction-parts"
 
 EXPECTED_COLUMNS = [

@@ -5,7 +5,7 @@ Checks that each extracted quote in quotes.csv appears verbatim in its source tr
 Handles ellipsis (...) as per valid-quote-rules: each segment must appear in order.
 
 Usage:
-    python3 02-workflows/build-dynamic-personas/validate-quotes.py
+    python3 02-workflows/extract-and-tag-quotes/validate-quotes.py
 
 Exit codes:
     0 — all quotes PASS
@@ -21,9 +21,9 @@ from pathlib import Path
 # ── Paths ────────────────────────────────────────────────────────────────────────
 
 ROOT = Path(__file__).resolve().parents[2]
-MANIFEST_PATH = ROOT / "04-process" / "build-dynamic-personas" / "p0-prepare" / "manifest.json"
-QUOTES_PATH = ROOT / "04-process" / "build-dynamic-personas" / "p1-quote-extraction" / "quotes.csv"
-REPORT_PATH = ROOT / "04-process" / "build-dynamic-personas" / "p2-validate-quotes" / "quote-validation-report.csv"
+MANIFEST_PATH = ROOT / "04-process" / "extract-and-tag-quotes" / "p0-prepare" / "manifest.json"
+QUOTES_PATH = ROOT / "04-process" / "extract-and-tag-quotes" / "p1-quote-extraction" / "quotes.csv"
+REPORT_PATH = ROOT / "04-process" / "extract-and-tag-quotes" / "p2-validate-quotes" / "quote-validation-report.csv"
 
 REPORT_COLUMNS = [
     "participant_id",

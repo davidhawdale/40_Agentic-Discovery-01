@@ -4,7 +4,7 @@ Phase 6: Prepare Persona Inputs
 Parses archetypes.md and writes one JSON input pack per archetype.
 
 Usage:
-    python3 02-workflows/build-dynamic-personas/prepare-persona-inputs.py
+    python3 02-workflows/build-personas/prepare-persona-inputs.py
 
 Exit codes:
     0 — PASS
@@ -17,11 +17,11 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-P5_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p5-synthesize-archetypes"
+P5_DIR = ROOT / "04-process" / "synthesise-archetypes"
 ARCHETYPES_PATH = P5_DIR / "archetypes.md"
 EXTRACTS_DIR = P5_DIR / "extracts"
 
-P6_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p6-create-personas"
+P6_DIR = ROOT / "04-process" / "build-personas"
 INPUTS_DIR = P6_DIR / "persona-inputs"
 PERSONAS_DIR = P6_DIR / "personas"
 

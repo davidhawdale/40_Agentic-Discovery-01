@@ -3,7 +3,7 @@
 Phase 7/8: Verify Roleplay Response
 
 Usage:
-  python3 02-workflows/build-dynamic-personas/verify-roleplay-response.py --file <response.md>
+  python3 02-workflows/roleplay-personas/verify-roleplay-response.py --file <response.md>
 """
 
 from __future__ import annotations
@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_PACK = ROOT / "04-process" / "build-dynamic-personas" / "p7-role-play" / "session-pack.json"
+DEFAULT_PACK = ROOT / "04-process" / "roleplay-personas" / "roleplay" / "session-pack.json"
 
 H_TEAM = "## Team Question"
 H_RESP = "## Persona Responses"

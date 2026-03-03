@@ -4,7 +4,7 @@ Phase 1: Verify Quote Extracts Completion
 Checks that every participant in the manifest has extracted quotes in quotes.csv.
 
 Usage:
-    python3 02-workflows/build-dynamic-personas/verify-quote-extracts-completion.py
+    python3 02-workflows/extract-and-tag-quotes/verify-quote-extracts-completion.py
 
 Exit codes:
     0 — PASS (or PASS with warnings)
@@ -19,8 +19,8 @@ from pathlib import Path
 # ── Paths ───────────────────────────────────────────────────────────────────────
 
 ROOT = Path(__file__).resolve().parents[2]
-MANIFEST_PATH = ROOT / "04-process" / "build-dynamic-personas" / "p0-prepare" / "manifest.json"
-PHASE1_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p1-quote-extraction"
+MANIFEST_PATH = ROOT / "04-process" / "extract-and-tag-quotes" / "p0-prepare" / "manifest.json"
+PHASE1_DIR = ROOT / "04-process" / "extract-and-tag-quotes" / "p1-quote-extraction"
 QUOTES_PATH = PHASE1_DIR / "quotes.csv"
 PARTS_DIR = PHASE1_DIR / "quote-parts"
 

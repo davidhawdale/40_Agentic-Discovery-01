@@ -4,7 +4,7 @@ Phase 7: Prepare Roleplay Pack
 Builds deterministic roleplay artifacts from Phase 6 persona outputs.
 
 Usage:
-  python3 02-workflows/build-dynamic-personas/prepare-roleplay-pack.py
+  python3 02-workflows/roleplay-personas/prepare-roleplay-pack.py
 
 Exit codes:
   0 PASS
@@ -20,12 +20,12 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-P6_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p6-create-personas"
+P6_DIR = ROOT / "04-process" / "build-personas"
 P6_PERSONA_INPUTS = P6_DIR / "persona-inputs"
-P7_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p7-role-play"
+P7_DIR = ROOT / "04-process" / "roleplay-personas" / "roleplay"
 P7_SESSIONS = P7_DIR / "sessions"
-P4_QUOTES = ROOT / "04-process" / "build-dynamic-personas" / "p4-consolidate-tags" / "consolidated-quotes.csv"
-P3_CONTRADICTIONS = ROOT / "04-process" / "build-dynamic-personas" / "p3-check-contradictions" / "contradictions.csv"
+P4_QUOTES = ROOT / "04-process" / "extract-and-tag-quotes" / "p4-consolidate-tags" / "consolidated-quotes.csv"
+P3_CONTRADICTIONS = ROOT / "04-process" / "extract-and-tag-quotes" / "p3-check-contradictions" / "contradictions.csv"
 PRODUCT_VISION = ROOT / "00-brief" / "product-vision.md"
 RESEARCH_BRIEF = ROOT / "03-inputs" / "research-brief.md"
 
@@ -242,8 +242,8 @@ def main() -> None:
 
     pack_payload = {
         "version": "1",
-        "workflow": "build-dynamic-personas",
-        "phase": "p7-role-play",
+        "workflow": "roleplay-personas",
+        "phase": "roleplay",
         "personas": personas,
         "moderator_policy": {
             "must_include": [

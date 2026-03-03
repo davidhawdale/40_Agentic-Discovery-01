@@ -4,7 +4,7 @@ Phase 6: Sync Persona Filenames
 Renames persona markdown files to match their H1 title and updates input packs.
 
 Usage:
-    python3 02-workflows/build-dynamic-personas/sync-persona-filenames.py
+    python3 02-workflows/build-personas/sync-persona-filenames.py
 
 Exit codes:
     0 — PASS
@@ -18,7 +18,7 @@ import unicodedata
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-P6_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p6-create-personas"
+P6_DIR = ROOT / "04-process" / "build-personas"
 INPUTS_DIR = P6_DIR / "persona-inputs"
 PERSONAS_DIR = P6_DIR / "personas"
 

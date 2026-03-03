@@ -14,9 +14,9 @@ With archetypes defined, this workflow gives each archetype a human identity: a 
 
 | Input | Location |
 |-------|----------|
-| Archetype profiles | `04-process/build-dynamic-personas/p5-synthesize-archetypes/archetypes.md` |
-| Per-participant extracts | `04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/*.md` |
-| Participant assignments | `04-process/build-dynamic-personas/p5-synthesize-archetypes/participant-archetype-assignments.csv` |
+| Archetype profiles | `04-process/synthesise-archetypes/archetypes.md` |
+| Per-participant extracts | `04-process/synthesise-archetypes/extracts/*.md` |
+| Participant assignments | `04-process/synthesise-archetypes/participant-archetype-assignments.csv` |
 | Persona template | `10-resources/templates/persona-template.md` |
 
 > These are produced by the `synthesise-archetypes` workflow. Run that workflow first.

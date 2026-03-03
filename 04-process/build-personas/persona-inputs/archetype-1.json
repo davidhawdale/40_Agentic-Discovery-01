@@ -36,20 +36,20 @@
     }
   ],
   "participant_extract_files": [
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/10.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/11.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/20.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/21.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/28.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/29.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/33.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/36.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/49.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/50.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/FR36.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/PL21.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/13.md"
+    "04-process/synthesise-archetypes/extracts/10.md",
+    "04-process/synthesise-archetypes/extracts/11.md",
+    "04-process/synthesise-archetypes/extracts/20.md",
+    "04-process/synthesise-archetypes/extracts/21.md",
+    "04-process/synthesise-archetypes/extracts/28.md",
+    "04-process/synthesise-archetypes/extracts/29.md",
+    "04-process/synthesise-archetypes/extracts/33.md",
+    "04-process/synthesise-archetypes/extracts/36.md",
+    "04-process/synthesise-archetypes/extracts/49.md",
+    "04-process/synthesise-archetypes/extracts/50.md",
+    "04-process/synthesise-archetypes/extracts/FR36.md",
+    "04-process/synthesise-archetypes/extracts/PL21.md",
+    "04-process/synthesise-archetypes/extracts/13.md"
   ],
   "template_file": "10-resources/templates/persona-template.md",
-  "output_file": "04-process/build-dynamic-personas/p6-create-personas/personas/maya-patel.md"
+  "output_file": "04-process/build-personas/personas/maya-patel.md"
 }

@@ -10,9 +10,9 @@ Using the archetypes and participant extracts produced by the `synthesise-archet
 
 The following outputs from `synthesise-archetypes` must exist before running this workflow:
 
-- `04-process/build-dynamic-personas/p5-synthesize-archetypes/archetypes.md`
-- `04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/*.md`
-- `04-process/build-dynamic-personas/p5-synthesize-archetypes/participant-archetype-assignments.csv`
+- `04-process/synthesise-archetypes/archetypes.md`
+- `04-process/synthesise-archetypes/extracts/*.md`
+- `04-process/synthesise-archetypes/participant-archetype-assignments.csv`
 
 ## Process
 
@@ -20,8 +20,8 @@ The following outputs from `synthesise-archetypes` must exist before running thi
 
 - Goal: Produce five persona files, one per archetype.
 - Input:
-  - `04-process/build-dynamic-personas/p5-synthesize-archetypes/archetypes.md`
-  - `04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/*.md`
+  - `04-process/synthesise-archetypes/archetypes.md`
+  - `04-process/synthesise-archetypes/extracts/*.md`
   - `10-resources/templates/persona-template.md`
   - `.claude/rules/persona-diversity-guidance.md`
 - Sequence:
@@ -30,12 +30,13 @@ The following outputs from `synthesise-archetypes` must exist before running thi
   3. Run `python3 02-workflows/build-personas/sync-persona-filenames.py`.
   4. Run `python3 02-workflows/build-personas/verify-personas.py`.
   5. Run `python3 02-workflows/build-personas/verify-persona-diversity.py`.
-  6. Run Phase 6 Human Review Gate summary and stop for user confirmation.
+  6. Run `python3 02-workflows/build-personas/summarize-personas.py`.
+  7. Run Phase 6 Human Review Gate summary and stop for user confirmation.
 - For persona writing, spawn the `persona-writer` sub-agent from:
   - `.claude/agents/persona-writer/persona-writer.md`
 - In Codex/OpenAI, "spawn sub-agent" means: read `.claude/agents/persona-writer/persona-writer.md` and execute those instructions inline.
 - Output:
-  - `04-process/build-dynamic-personas/p6-create-personas/personas/*.md` (filename = slugified persona H1)
+  - `04-process/build-personas/personas/*.md` (filename = slugified persona H1)
 - Constraints:
   - Keep quote evidence verbatim
   - Include exactly 2 quotes in each persona `## Key Quotes` section
@@ -50,8 +51,8 @@ The following outputs from `synthesise-archetypes` must exist before running thi
 
 After Phase 6 completes, read:
 
-- `04-process/build-dynamic-personas/p6-create-personas/personas/`
-- `04-process/build-dynamic-personas/p6-create-personas/`
+- `04-process/build-personas/personas/`
+- `04-process/build-personas/`
 
 Present a summary:
 
@@ -63,7 +64,7 @@ Structural validation:    PASS|FAIL
 Diversity validation:     PASS|FAIL
 
 Detailed results:
-  04-process/build-dynamic-personas/p6-create-personas/personas/
+  04-process/build-personas/personas/
 ```
 
 Then ask:
@@ -79,7 +80,7 @@ After the user confirms Phase 6 is complete and satisfactory, copy the final del
 
 ```bash
 mkdir -p 05-outputs/build-personas/personas
-cp 04-process/build-dynamic-personas/p6-create-personas/personas/*.md 05-outputs/build-personas/personas/
+cp 04-process/build-personas/personas/*.md 05-outputs/build-personas/personas/
 ```
 
 Confirm files are present, then report workflow complete.

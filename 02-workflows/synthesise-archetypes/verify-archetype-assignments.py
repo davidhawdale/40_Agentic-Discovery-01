@@ -4,7 +4,7 @@ Phase 5: Verify Archetype Assignments
 Validates archetypes.md structure and participant assignment coverage.
 
 Usage:
-    python3 02-workflows/build-dynamic-personas/verify-archetype-assignments.py
+    python3 02-workflows/synthesise-archetypes/verify-archetype-assignments.py
 
 Exit codes:
     0 — PASS
@@ -19,7 +19,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-P5_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p5-synthesize-archetypes"
+P5_DIR = ROOT / "04-process" / "synthesise-archetypes"
 EXPECTED_IDS_PATH = P5_DIR / "expected-participants.json"
 ARCHETYPES_PATH = P5_DIR / "archetypes.md"
 ASSIGNMENTS_PATH = P5_DIR / "participant-archetype-assignments.csv"

@@ -27,11 +27,11 @@
     }
   ],
   "participant_extract_files": [
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/8.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/9.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/19.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/30.md"
+    "04-process/synthesise-archetypes/extracts/8.md",
+    "04-process/synthesise-archetypes/extracts/9.md",
+    "04-process/synthesise-archetypes/extracts/19.md",
+    "04-process/synthesise-archetypes/extracts/30.md"
   ],
   "template_file": "10-resources/templates/persona-template.md",
-  "output_file": "04-process/build-dynamic-personas/p6-create-personas/personas/noah-kim.md"
+  "output_file": "04-process/build-personas/personas/noah-kim.md"
 }

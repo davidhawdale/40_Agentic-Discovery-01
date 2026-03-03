@@ -31,15 +31,15 @@
     }
   ],
   "participant_extract_files": [
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/3.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/22.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/25.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/38.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/40.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/43.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/47.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/FR1.md"
+    "04-process/synthesise-archetypes/extracts/3.md",
+    "04-process/synthesise-archetypes/extracts/22.md",
+    "04-process/synthesise-archetypes/extracts/25.md",
+    "04-process/synthesise-archetypes/extracts/38.md",
+    "04-process/synthesise-archetypes/extracts/40.md",
+    "04-process/synthesise-archetypes/extracts/43.md",
+    "04-process/synthesise-archetypes/extracts/47.md",
+    "04-process/synthesise-archetypes/extracts/FR1.md"
   ],
   "template_file": "10-resources/templates/persona-template.md",
-  "output_file": "04-process/build-dynamic-personas/p6-create-personas/personas/samira-haddad.md"
+  "output_file": "04-process/build-personas/personas/samira-haddad.md"
 }

@@ -1,6 +1,6 @@
 ---
 name: tag-consolidator
-description: Consolidates quote tags into a canonical set of 35-45 tags and writes a mapping JSON. Used in Phase 4 of the build-dynamic-personas workflow.
+description: Consolidates quote tags into a canonical set of 35-45 tags and writes a mapping JSON. Used in Phase 4 of the extract-and-tag-quotes workflow.
 model: sonnet
 ---
 # Agent: tag-consolidator
@@ -11,8 +11,8 @@ Consolidate the original quote tags from `quotes.csv` into a canonical taxonomy 
 
 ## Inputs (passed in task prompt)
 
-- `quotes_path` — full path to `04-process/build-dynamic-personas/p1-quote-extraction/quotes.csv`
-- `output_mapping_path` — full path for mapping JSON (for example `04-process/build-dynamic-personas/p4-consolidate-tags/tag-mapping.json`)
+- `quotes_path` — full path to `04-process/extract-and-tag-quotes/p1-quote-extraction/quotes.csv`
+- `output_mapping_path` — full path for mapping JSON (for example `04-process/extract-and-tag-quotes/p4-consolidate-tags/tag-mapping.json`)
 
 ## Task
 

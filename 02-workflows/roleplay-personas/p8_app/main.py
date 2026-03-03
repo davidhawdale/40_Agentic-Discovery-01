@@ -16,8 +16,8 @@ from .prompting import build_focus_group_prompt, correction_prompt, load_system_
 from .storage import Storage
 
 ROOT = Path(__file__).resolve().parents[3]
-P7_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p7-role-play"
-P8_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p8-roleplay-app"
+P7_DIR = ROOT / "04-process" / "roleplay-personas" / "roleplay"
+P8_DIR = ROOT / "04-process" / "roleplay-personas" / "roleplay-app"
 PACK_FILE = P7_DIR / "session-pack.json"
 SYSTEM_PROMPT_FILE = P7_DIR / "panel-system-prompt.md"
 APP_CONFIG_FILE = P8_DIR / "app-config.json"

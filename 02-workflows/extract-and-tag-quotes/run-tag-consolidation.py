@@ -4,7 +4,7 @@ Phase 4: Consolidate Quote Tags
 Reads quote rows plus a tag mapping and writes consolidated quote/tag artifacts.
 
 Usage:
-    python3 02-workflows/build-dynamic-personas/run-tag-consolidation.py
+    python3 02-workflows/extract-and-tag-quotes/run-tag-consolidation.py
 
 Exit codes:
     0 — PASS
@@ -20,8 +20,8 @@ from pathlib import Path
 # ── Paths ───────────────────────────────────────────────────────────────────────
 
 ROOT = Path(__file__).resolve().parents[2]
-QUOTES_PATH = ROOT / "04-process" / "build-dynamic-personas" / "p1-quote-extraction" / "quotes.csv"
-PHASE4_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p4-consolidate-tags"
+QUOTES_PATH = ROOT / "04-process" / "extract-and-tag-quotes" / "p1-quote-extraction" / "quotes.csv"
+PHASE4_DIR = ROOT / "04-process" / "extract-and-tag-quotes" / "p4-consolidate-tags"
 MAPPING_PATH = PHASE4_DIR / "tag-mapping.json"
 CONSOLIDATED_QUOTES_PATH = PHASE4_DIR / "consolidated-quotes.csv"
 CROSSWALK_PATH = PHASE4_DIR / "tag-crosswalk.csv"

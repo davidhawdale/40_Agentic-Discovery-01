@@ -14,10 +14,10 @@ With personas created, this workflow makes them interactive. Teams can use the r
 
 | Input | Location |
 |-------|----------|
-| Persona files | `04-process/build-dynamic-personas/p6-create-personas/personas/*.md` |
-| Archetype input packs | `04-process/build-dynamic-personas/p6-create-personas/persona-inputs/archetype-*.json` |
-| Consolidated quotes | `04-process/build-dynamic-personas/p4-consolidate-tags/consolidated-quotes.csv` |
-| Contradictions | `04-process/build-dynamic-personas/p3-check-contradictions/contradictions.csv` |
+| Persona files | `04-process/build-personas/personas/*.md` |
+| Archetype input packs | `04-process/build-personas/persona-inputs/archetype-*.json` |
+| Consolidated quotes | `04-process/extract-and-tag-quotes/p4-consolidate-tags/consolidated-quotes.csv` |
+| Contradictions | `04-process/extract-and-tag-quotes/p3-check-contradictions/contradictions.csv` |
 | Product vision | `00-brief/product-vision.md` |
 | Research brief | `03-inputs/research-brief.md` |
 

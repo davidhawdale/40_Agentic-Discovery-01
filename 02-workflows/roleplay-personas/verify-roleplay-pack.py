@@ -3,7 +3,7 @@
 Phase 7/8: Verify Roleplay Pack
 
 Usage:
-  python3 02-workflows/build-dynamic-personas/verify-roleplay-pack.py
+  python3 02-workflows/roleplay-personas/verify-roleplay-pack.py
 """
 
 from __future__ import annotations
@@ -13,8 +13,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-P7_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p7-role-play"
-P6_PERSONAS_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p6-create-personas" / "personas"
+P7_DIR = ROOT / "04-process" / "roleplay-personas" / "roleplay"
+P6_PERSONAS_DIR = ROOT / "04-process" / "build-personas" / "personas"
 PACK = P7_DIR / "session-pack.json"
 PROMPT = P7_DIR / "panel-system-prompt.md"
 RUNBOOK = P7_DIR / "session-runbook.md"

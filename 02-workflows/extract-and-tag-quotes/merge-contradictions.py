@@ -4,7 +4,7 @@ Phase 3: Merge Contradictions
 Merges per-participant contradiction CSVs from contradiction-parts/ into a single contradictions.csv.
 
 Usage:
-    python3 02-workflows/build-dynamic-personas/merge-contradictions.py
+    python3 02-workflows/extract-and-tag-quotes/merge-contradictions.py
 
 Exit codes:
     0 — PASS (or PASS with warnings)
@@ -19,9 +19,9 @@ from pathlib import Path
 # ── Paths ───────────────────────────────────────────────────────────────────────
 
 ROOT = Path(__file__).resolve().parents[2]
-PARTS_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p3-check-contradictions" / "contradiction-parts"
-OUTPUT_PATH = ROOT / "04-process" / "build-dynamic-personas" / "p3-check-contradictions" / "contradictions.csv"
-MANIFEST_PATH = ROOT / "04-process" / "build-dynamic-personas" / "p0-prepare" / "manifest.json"
+PARTS_DIR = ROOT / "04-process" / "extract-and-tag-quotes" / "p3-check-contradictions" / "contradiction-parts"
+OUTPUT_PATH = ROOT / "04-process" / "extract-and-tag-quotes" / "p3-check-contradictions" / "contradictions.csv"
+MANIFEST_PATH = ROOT / "04-process" / "extract-and-tag-quotes" / "p0-prepare" / "manifest.json"
 
 EXPECTED_COLUMNS = [
     "participant_id",

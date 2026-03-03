@@ -38,22 +38,22 @@
     }
   ],
   "participant_extract_files": [
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/5.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/12.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/16.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/23.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/31.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/32.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/34.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/35.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/37.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/42.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/44.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/46.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/ES5.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/FR37.md",
-    "04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/PL13.md"
+    "04-process/synthesise-archetypes/extracts/5.md",
+    "04-process/synthesise-archetypes/extracts/12.md",
+    "04-process/synthesise-archetypes/extracts/16.md",
+    "04-process/synthesise-archetypes/extracts/23.md",
+    "04-process/synthesise-archetypes/extracts/31.md",
+    "04-process/synthesise-archetypes/extracts/32.md",
+    "04-process/synthesise-archetypes/extracts/34.md",
+    "04-process/synthesise-archetypes/extracts/35.md",
+    "04-process/synthesise-archetypes/extracts/37.md",
+    "04-process/synthesise-archetypes/extracts/42.md",
+    "04-process/synthesise-archetypes/extracts/44.md",
+    "04-process/synthesise-archetypes/extracts/46.md",
+    "04-process/synthesise-archetypes/extracts/ES5.md",
+    "04-process/synthesise-archetypes/extracts/FR37.md",
+    "04-process/synthesise-archetypes/extracts/PL13.md"
   ],
   "template_file": "10-resources/templates/persona-template.md",
-  "output_file": "04-process/build-dynamic-personas/p6-create-personas/personas/elena-rossi.md"
+  "output_file": "04-process/build-personas/personas/elena-rossi.md"
 }

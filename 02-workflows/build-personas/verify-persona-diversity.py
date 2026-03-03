@@ -4,7 +4,7 @@ Phase 6: Verify Persona Diversity
 Checks set-level diversity across the five persona files.
 
 Usage:
-    python3 02-workflows/build-dynamic-personas/verify-persona-diversity.py
+    python3 02-workflows/build-personas/verify-persona-diversity.py
 
 Exit codes:
     0 — PASS
@@ -17,7 +17,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-P6_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p6-create-personas"
+P6_DIR = ROOT / "04-process" / "build-personas"
 PERSONAS_DIR = P6_DIR / "personas"
 INPUTS_DIR = P6_DIR / "persona-inputs"
 

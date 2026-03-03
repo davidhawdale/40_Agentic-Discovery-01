@@ -10,8 +10,8 @@ Read per-participant quote extracts produced by the `extract-and-tag-quotes` wor
 
 The following outputs from `extract-and-tag-quotes` must exist before running this workflow:
 
-- `04-process/build-dynamic-personas/p0-prepare/manifest.json`
-- `04-process/build-dynamic-personas/p4-consolidate-tags/consolidated-quotes.csv`
+- `04-process/extract-and-tag-quotes/p0-prepare/manifest.json`
+- `04-process/extract-and-tag-quotes/p4-consolidate-tags/consolidated-quotes.csv`
 
 ## Process
 
@@ -19,8 +19,8 @@ The following outputs from `extract-and-tag-quotes` must exist before running th
 
 - Goal: Produce exactly five named core archetypes with participant assignments, plus optional outlier entries for weak-fit participants.
 - Input:
-  - `04-process/build-dynamic-personas/p4-consolidate-tags/consolidated-quotes.csv`
-  - `04-process/build-dynamic-personas/p0-prepare/manifest.json`
+  - `04-process/extract-and-tag-quotes/p4-consolidate-tags/consolidated-quotes.csv`
+  - `04-process/extract-and-tag-quotes/p0-prepare/manifest.json`
 - Sequence:
   1. Run `python3 02-workflows/synthesise-archetypes/prepare-archetype-extracts.py`.
   2. Run `archetype-writer` sub-agent.
@@ -30,13 +30,13 @@ The following outputs from `extract-and-tag-quotes` must exist before running th
 - For archetype synthesis, spawn the `archetype-writer` sub-agent from:
   - `.claude/agents/archetype-writer/archetype-writer.md`
 - Pass these values in the task prompt:
-  - `extracts_folder` — `04-process/build-dynamic-personas/p5-synthesize-archetypes/extracts/`
-  - `output_file` — `04-process/build-dynamic-personas/p5-synthesize-archetypes/archetypes.md`
-  - `expected_participants` — from `04-process/build-dynamic-personas/p5-synthesize-archetypes/expected-participants.json`
+  - `extracts_folder` — `04-process/synthesise-archetypes/extracts/`
+  - `output_file` — `04-process/synthesise-archetypes/archetypes.md`
+  - `expected_participants` — from `04-process/synthesise-archetypes/expected-participants.json`
 - In Codex/OpenAI, "spawn sub-agent" means: read `.claude/agents/archetype-writer/archetype-writer.md` and execute those instructions inline.
 - Output:
-  - `04-process/build-dynamic-personas/p5-synthesize-archetypes/archetypes.md`
-  - `04-process/build-dynamic-personas/p5-synthesize-archetypes/participant-archetype-assignments.csv`
+  - `04-process/synthesise-archetypes/archetypes.md`
+  - `04-process/synthesise-archetypes/participant-archetype-assignments.csv`
 - Constraints:
   - Exactly 5 core archetypes
   - Every expected participant appears exactly once across core archetypes and optional outliers
@@ -49,8 +49,8 @@ The following outputs from `extract-and-tag-quotes` must exist before running th
 
 After Phase 5 completes, read:
 
-- `04-process/build-dynamic-personas/p5-synthesize-archetypes/archetypes.md`
-- `04-process/build-dynamic-personas/p5-synthesize-archetypes/participant-archetype-assignments.csv`
+- `04-process/synthesise-archetypes/archetypes.md`
+- `04-process/synthesise-archetypes/participant-archetype-assignments.csv`
 
 Present a summary:
 
@@ -63,8 +63,8 @@ Participants assigned:      N
 Outliers:                   N
 
 Detailed results:
-  04-process/build-dynamic-personas/p5-synthesize-archetypes/archetypes.md
-  04-process/build-dynamic-personas/p5-synthesize-archetypes/participant-archetype-assignments.csv
+  04-process/synthesise-archetypes/archetypes.md
+  04-process/synthesise-archetypes/participant-archetype-assignments.csv
 ```
 
 Then ask:
@@ -80,8 +80,8 @@ After the user confirms Phase 5 is complete and satisfactory, copy the final del
 
 ```bash
 mkdir -p 05-outputs/synthesise-archetypes
-cp 04-process/build-dynamic-personas/p5-synthesize-archetypes/archetypes.md 05-outputs/synthesise-archetypes/archetypes.md
-cp 04-process/build-dynamic-personas/p5-synthesize-archetypes/participant-archetype-assignments.csv 05-outputs/synthesise-archetypes/participant-archetype-assignments.csv
+cp 04-process/synthesise-archetypes/archetypes.md 05-outputs/synthesise-archetypes/archetypes.md
+cp 04-process/synthesise-archetypes/participant-archetype-assignments.csv 05-outputs/synthesise-archetypes/participant-archetype-assignments.csv
 ```
 
 Confirm files are present, then report workflow complete.

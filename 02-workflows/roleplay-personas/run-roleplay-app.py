@@ -3,7 +3,7 @@
 Phase 8: Run Persona Role-Play App (FastAPI + HTMX)
 
 Usage:
-  python3 02-workflows/build-dynamic-personas/run-roleplay-app.py
+  python3 02-workflows/roleplay-personas/run-roleplay-app.py
 """
 
 from __future__ import annotations
@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "02-workflows" / "build-dynamic-personas"))
+sys.path.insert(0, str(ROOT / "02-workflows" / "roleplay-personas"))
 
 
 def main() -> None:

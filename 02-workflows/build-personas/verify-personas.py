@@ -4,7 +4,7 @@ Phase 6: Verify Personas
 Validates persona file structure and quote attribution against archetype assignments.
 
 Usage:
-    python3 02-workflows/build-dynamic-personas/verify-personas.py
+    python3 02-workflows/build-personas/verify-personas.py
 
 Exit codes:
     0 — PASS
@@ -18,8 +18,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-P5_ASSIGNMENTS = ROOT / "04-process" / "build-dynamic-personas" / "p5-synthesize-archetypes" / "participant-archetype-assignments.csv"
-P6_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p6-create-personas"
+P5_ASSIGNMENTS = ROOT / "04-process" / "synthesise-archetypes" / "participant-archetype-assignments.csv"
+P6_DIR = ROOT / "04-process" / "build-personas"
 PERSONAS_DIR = P6_DIR / "personas"
 INPUTS_DIR = P6_DIR / "persona-inputs"
 

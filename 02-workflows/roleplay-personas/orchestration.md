@@ -10,10 +10,10 @@ Using the persona files and evidence produced by `build-personas`, build a deter
 
 The following outputs from upstream workflows must exist before running this workflow:
 
-- `04-process/build-dynamic-personas/p6-create-personas/persona-inputs/archetype-*.json` (from `build-personas`)
-- `04-process/build-dynamic-personas/p6-create-personas/personas/*.md` (from `build-personas`)
-- `04-process/build-dynamic-personas/p4-consolidate-tags/consolidated-quotes.csv` (from `extract-and-tag-quotes`)
-- `04-process/build-dynamic-personas/p3-check-contradictions/contradictions.csv` (from `extract-and-tag-quotes`)
+- `04-process/build-personas/persona-inputs/archetype-*.json` (from `build-personas`)
+- `04-process/build-personas/personas/*.md` (from `build-personas`)
+- `04-process/extract-and-tag-quotes/p4-consolidate-tags/consolidated-quotes.csv` (from `extract-and-tag-quotes`)
+- `04-process/extract-and-tag-quotes/p3-check-contradictions/contradictions.csv` (from `extract-and-tag-quotes`)
 - `00-brief/product-vision.md`
 - `03-inputs/research-brief.md`
 
@@ -29,18 +29,18 @@ The following outputs from upstream workflows must exist before running this wor
   4. If smoke output exists, run `python3 02-workflows/roleplay-personas/verify-roleplay-response.py --file <smoke-output-path>`.
   5. Run Phase 7 Human Review Gate summary and stop for user confirmation.
 - Inputs:
-  - `04-process/build-dynamic-personas/p6-create-personas/persona-inputs/archetype-*.json`
-  - `04-process/build-dynamic-personas/p6-create-personas/personas/*.md`
-  - `04-process/build-dynamic-personas/p4-consolidate-tags/consolidated-quotes.csv`
-  - `04-process/build-dynamic-personas/p3-check-contradictions/contradictions.csv`
+  - `04-process/build-personas/persona-inputs/archetype-*.json`
+  - `04-process/build-personas/personas/*.md`
+  - `04-process/extract-and-tag-quotes/p4-consolidate-tags/consolidated-quotes.csv`
+  - `04-process/extract-and-tag-quotes/p3-check-contradictions/contradictions.csv`
   - `00-brief/product-vision.md`
   - `03-inputs/research-brief.md`
 - Outputs:
-  - `04-process/build-dynamic-personas/p7-role-play/session-pack.json`
-  - `04-process/build-dynamic-personas/p7-role-play/panel-system-prompt.md`
-  - `04-process/build-dynamic-personas/p7-role-play/session-runbook.md`
-  - `04-process/build-dynamic-personas/p7-role-play/question-template.md`
-  - Optional smoke output in `04-process/build-dynamic-personas/p8-roleplay-app/sessions/*.md`
+  - `04-process/roleplay-personas/roleplay/session-pack.json`
+  - `04-process/roleplay-personas/roleplay/panel-system-prompt.md`
+  - `04-process/roleplay-personas/roleplay/session-runbook.md`
+  - `04-process/roleplay-personas/roleplay/question-template.md`
+  - Optional smoke output in `04-process/roleplay-personas/roleplay-app/sessions/*.md`
 - Constraints:
   - Session pack must include exactly 5 personas.
   - Persona evidence refs must be present and non-empty.
@@ -54,9 +54,9 @@ The following outputs from upstream workflows must exist before running this wor
 
 After Phase 7 completes, read:
 
-- `04-process/build-dynamic-personas/p7-role-play/session-pack.json`
-- `04-process/build-dynamic-personas/p7-role-play/panel-system-prompt.md`
-- Optional smoke output in `04-process/build-dynamic-personas/p8-roleplay-app/sessions/`
+- `04-process/roleplay-personas/roleplay/session-pack.json`
+- `04-process/roleplay-personas/roleplay/panel-system-prompt.md`
+- Optional smoke output in `04-process/roleplay-personas/roleplay-app/sessions/`
 
 Present a summary:
 
@@ -69,8 +69,8 @@ Pack verification:          PASS|FAIL
 Smoke response check:       PASS|FAIL|SKIPPED
 
 Detailed results:
-  04-process/build-dynamic-personas/p7-role-play/session-pack.json
-  04-process/build-dynamic-personas/p7-role-play/panel-system-prompt.md
+  04-process/roleplay-personas/roleplay/session-pack.json
+  04-process/roleplay-personas/roleplay/panel-system-prompt.md
 ```
 
 Then ask:
@@ -96,10 +96,10 @@ Do not proceed to the next phase until the user explicitly says yes.
   - Required env var for live answers: `OPENAI_API_KEY`
   - Optional model override: `OPENAI_MODEL` (default `gpt-4o`)
 - App outputs:
-  - `04-process/build-dynamic-personas/p8-roleplay-app/app-config.json`
-  - `04-process/build-dynamic-personas/p8-roleplay-app/latest-session.json`
-  - `04-process/build-dynamic-personas/p8-roleplay-app/sessions/*.json`
-  - `04-process/build-dynamic-personas/p8-roleplay-app/logs/app.log`
+  - `04-process/roleplay-personas/roleplay-app/app-config.json`
+  - `04-process/roleplay-personas/roleplay-app/latest-session.json`
+  - `04-process/roleplay-personas/roleplay-app/sessions/*.json`
+  - `04-process/roleplay-personas/roleplay-app/logs/app.log`
 - Hard validation behavior:
   - Every model response is checked with `verify-roleplay-response` rules.
   - One targeted retry is allowed on verifier failure.
@@ -116,9 +116,9 @@ Do not proceed to the next phase until the user explicitly says yes.
 
 After Phase 8 completes, read:
 
-- `04-process/build-dynamic-personas/p8-roleplay-app/app-config.json`
-- `04-process/build-dynamic-personas/p8-roleplay-app/sessions/`
-- `04-process/build-dynamic-personas/p8-roleplay-app/logs/app.log`
+- `04-process/roleplay-personas/roleplay-app/app-config.json`
+- `04-process/roleplay-personas/roleplay-app/sessions/`
+- `04-process/roleplay-personas/roleplay-app/logs/app.log`
 
 Present a summary:
 
@@ -128,7 +128,7 @@ Phase 8 complete — Role-Play App Summary
 App startup status:          PASS|FAIL
 Session pack status:         PASS|FAIL
 Smoke turn verification:     PASS|FAIL|SKIPPED
-Session artifact path:       04-process/build-dynamic-personas/p8-roleplay-app/sessions/
+Session artifact path:       04-process/roleplay-personas/roleplay-app/sessions/
 ```
 
 Then ask:
@@ -140,12 +140,12 @@ Do not proceed until the user explicitly says yes.
 
 ### Final Step: Copy Outputs
 
-After the user confirms Phase 8 is complete and satisfactory, copy the final deliverables to `05-outputs/persona-roleplay/`:
+After the user confirms Phase 8 is complete and satisfactory, copy the final deliverables to `05-outputs/roleplay-personas/`:
 
 ```bash
 mkdir -p 05-outputs/roleplay-personas
-cp 04-process/build-dynamic-personas/p7-role-play/session-pack.json 05-outputs/roleplay-personas/session-pack.json
-cp 04-process/build-dynamic-personas/p7-role-play/session-runbook.md 05-outputs/roleplay-personas/session-runbook.md
+cp 04-process/roleplay-personas/roleplay/session-pack.json 05-outputs/roleplay-personas/session-pack.json
+cp 04-process/roleplay-personas/roleplay/session-runbook.md 05-outputs/roleplay-personas/session-runbook.md
 ```
 
 Confirm files are present, then report workflow complete.

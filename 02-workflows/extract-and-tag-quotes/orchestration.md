@@ -17,7 +17,7 @@ The outputs of this workflow are the evidential foundation for all downstream pe
 - Paths:
   - Transcripts in: `03-inputs/interview-transcripts/`
   - Research brief in: `03-inputs/research-brief.md`
-  - Manifest out: `04-process/build-dynamic-personas/p0-prepare/manifest.json`
+  - Manifest out: `04-process/extract-and-tag-quotes/p0-prepare/manifest.json`
 - Input: Files in `03-inputs/interview-transcripts/`, research brief
 - Output: `p0-prepare/manifest.json` with transcript count, file paths, and language flags
 - If fail: Check `03-inputs/` structure; ensure transcripts are in expected format
@@ -26,12 +26,12 @@ The outputs of this workflow are the evidential foundation for all downstream pe
 
 - Goal: Extract notable quotes from each transcript; tag each with a memorable label, severity rating, sentiment, and question reference
 - Input: Each transcript entry from `p0-prepare/manifest.json`
-- For each transcript in the manifest, spawn a `transcript-quote-extractor` sub-agent with these values in the task prompt:
+- Spawn all `transcript-quote-extractor` sub-agents in parallel — one per transcript — each with these values in the task prompt:
   - `participant_id` — from manifest
   - `transcript_id` — from manifest (`id` field)
   - `transcript_path` — full path to the transcript file (from manifest `path` field, resolved from project root)
-  - `output_path` — `04-process/build-dynamic-personas/p1-quote-extraction/quote-parts/{participant_id}.csv`
-- Output: One CSV part file per transcript in `04-process/build-dynamic-personas/p1-quote-extraction/quote-parts/`
+  - `output_path` — `04-process/extract-and-tag-quotes/p1-quote-extraction/quote-parts/{participant_id}.csv`
+- Output: One CSV part file per transcript in `04-process/extract-and-tag-quotes/p1-quote-extraction/quote-parts/`
 - Merge: `python3 02-workflows/extract-and-tag-quotes/merge-quotes.py`
 - Validate completeness: `python3 02-workflows/extract-and-tag-quotes/verify-quote-extracts-completion.py`
 - If fail: Re-run the failed agent with a specific correction instruction; if second fail, skip and log WARN
@@ -80,13 +80,13 @@ Do not proceed to the next phase until the user explicitly says yes.
   2. Run `python3 02-workflows/extract-and-tag-quotes/verify-contradictions-completion.py`.
   3. Run `python3 02-workflows/extract-and-tag-quotes/merge-contradictions.py`.
   4. Run the Phase 3 Human Review Gate summary and stop for user confirmation.
-- For each participant in the manifest, spawn a `participant-contradiction-checker` sub-agent with:
+- Spawn all `participant-contradiction-checker` sub-agents in parallel — one per participant — each with:
   - `participant_id` — from manifest
   - `transcript_id` — from manifest (`id` field)
   - `quotes_path` — full path to `p1-quote-extraction/quotes.csv`
-  - `output_path` — `04-process/build-dynamic-personas/p3-check-contradictions/contradiction-parts/{participant_id}.csv`
+  - `output_path` — `04-process/extract-and-tag-quotes/p3-check-contradictions/contradiction-parts/{participant_id}.csv`
 - In Codex/OpenAI, "spawn sub-agent" means: read `.claude/agents/participant-contradiction-checker.md` and execute those instructions inline for each participant.
-- Output: One CSV part file per participant in `04-process/build-dynamic-personas/p3-check-contradictions/contradiction-parts/` (empty CSV with header if no contradictions)
+- Output: One CSV part file per participant in `04-process/extract-and-tag-quotes/p3-check-contradictions/contradiction-parts/` (empty CSV with header if no contradictions)
 - Verify completion: `python3 02-workflows/extract-and-tag-quotes/verify-contradictions-completion.py`
 - Merge: `python3 02-workflows/extract-and-tag-quotes/merge-contradictions.py`
 - If fail: Re-run the failed agent once with a specific correction instruction; if second fail, skip and log WARN
@@ -97,8 +97,8 @@ Do not proceed to the next phase until the user explicitly says yes.
 
 After Phase 3 completes, read:
 
-- `04-process/build-dynamic-personas/p0-prepare/manifest.json`
-- `04-process/build-dynamic-personas/p3-check-contradictions/contradictions.csv`
+- `04-process/extract-and-tag-quotes/p0-prepare/manifest.json`
+- `04-process/extract-and-tag-quotes/p3-check-contradictions/contradictions.csv`
 
 Present a summary:
 
@@ -110,7 +110,7 @@ Participants with contradictions: N
 Total contradictions found:       N
 
 [If contradictions found:]
-  Detailed results: 04-process/build-dynamic-personas/p3-check-contradictions/contradictions.csv
+  Detailed results: 04-process/extract-and-tag-quotes/p3-check-contradictions/contradictions.csv
   Use this file for participant-level contradiction details and quote pairs.
 
 [If none:]
@@ -119,7 +119,7 @@ Total contradictions found:       N
 
 Then ask:
 
-- **If contradictions found:** "There are [N] contradictions across [N] participants. Please review 04-process/build-dynamic-personas/p3-check-contradictions/contradictions.csv. Would you like to re-run any participants before continuing?"
+- **If contradictions found:** "There are [N] contradictions across [N] participants. Please review 04-process/extract-and-tag-quotes/p3-check-contradictions/contradictions.csv. Would you like to re-run any participants before continuing?"
 - **If none:** "No contradictions found. Ready to continue to the next phase?"
 
 Do not proceed to the next phase until the user explicitly says yes.
@@ -128,7 +128,7 @@ Do not proceed to the next phase until the user explicitly says yes.
 
 - Goal: Consolidate `p1` quote tags to a canonical set of around 40 tags (hard range 35-45) without changing quote text.
 - Input:
-  - `04-process/build-dynamic-personas/p1-quote-extraction/quotes.csv`
+  - `04-process/extract-and-tag-quotes/p1-quote-extraction/quotes.csv`
 - Sequence:
   1. Build tag mapping with `tag-consolidator`.
   2. Run `python3 02-workflows/extract-and-tag-quotes/run-tag-consolidation.py`.
@@ -136,12 +136,12 @@ Do not proceed to the next phase until the user explicitly says yes.
   4. Run the Phase 4 Human Review Gate summary and stop for user confirmation.
 - For consolidation mapping, spawn a `tag-consolidator` sub-agent with:
   - `quotes_path` — full path to `p1-quote-extraction/quotes.csv`
-  - `output_mapping_path` — `04-process/build-dynamic-personas/p4-consolidate-tags/tag-mapping.json`
+  - `output_mapping_path` — `04-process/extract-and-tag-quotes/p4-consolidate-tags/tag-mapping.json`
 - In Codex/OpenAI, "spawn sub-agent" means: read `.claude/agents/tag-consolidator.md` and execute those instructions inline.
 - Output:
-  - `04-process/build-dynamic-personas/p4-consolidate-tags/consolidated-quotes.csv` (all original quote rows + `consolidated_tag`)
-  - `04-process/build-dynamic-personas/p4-consolidate-tags/tag-crosswalk.csv` (original tag to consolidated tag mapping)
-  - `04-process/build-dynamic-personas/p4-consolidate-tags/tag-consolidation-report.md` (summary and distribution)
+  - `04-process/extract-and-tag-quotes/p4-consolidate-tags/consolidated-quotes.csv` (all original quote rows + `consolidated_tag`)
+  - `04-process/extract-and-tag-quotes/p4-consolidate-tags/tag-crosswalk.csv` (original tag to consolidated tag mapping)
+  - `04-process/extract-and-tag-quotes/p4-consolidate-tags/tag-consolidation-report.md` (summary and distribution)
 - Constraints:
   - Do not overwrite `p1-quote-extraction/quotes.csv`
   - Do not alter any `quote` text in output rows
@@ -155,8 +155,8 @@ Do not proceed to the next phase until the user explicitly says yes.
 
 After Phase 4 completes, read:
 
-- `04-process/build-dynamic-personas/p4-consolidate-tags/consolidated-quotes.csv`
-- `04-process/build-dynamic-personas/p4-consolidate-tags/tag-consolidation-report.md`
+- `04-process/extract-and-tag-quotes/p4-consolidate-tags/consolidated-quotes.csv`
+- `04-process/extract-and-tag-quotes/p4-consolidate-tags/tag-consolidation-report.md`
 
 Present a summary:
 
@@ -168,8 +168,8 @@ Original unique tags:      N
 Consolidated unique tags:  N
 
 Detailed results:
-  04-process/build-dynamic-personas/p4-consolidate-tags/tag-consolidation-report.md
-  04-process/build-dynamic-personas/p4-consolidate-tags/consolidated-quotes.csv
+  04-process/extract-and-tag-quotes/p4-consolidate-tags/tag-consolidation-report.md
+  04-process/extract-and-tag-quotes/p4-consolidate-tags/consolidated-quotes.csv
 ```
 
 Then ask:
@@ -185,9 +185,9 @@ After the user confirms Phase 4 is complete and satisfactory, copy the final del
 
 ```bash
 mkdir -p 05-outputs/extract-and-tag-quotes
-cp 04-process/build-dynamic-personas/p4-consolidate-tags/consolidated-quotes.csv 05-outputs/extract-and-tag-quotes/quotes.csv
-cp 04-process/build-dynamic-personas/p3-check-contradictions/contradictions.csv 05-outputs/extract-and-tag-quotes/contradictions.csv
-cp 04-process/build-dynamic-personas/p4-consolidate-tags/tag-consolidation-report.md 05-outputs/extract-and-tag-quotes/tag-consolidation-report.md
+cp 04-process/extract-and-tag-quotes/p4-consolidate-tags/consolidated-quotes.csv 05-outputs/extract-and-tag-quotes/quotes.csv
+cp 04-process/extract-and-tag-quotes/p3-check-contradictions/contradictions.csv 05-outputs/extract-and-tag-quotes/contradictions.csv
+cp 04-process/extract-and-tag-quotes/p4-consolidate-tags/tag-consolidation-report.md 05-outputs/extract-and-tag-quotes/tag-consolidation-report.md
 ```
 
 Confirm files are present, then report workflow complete.

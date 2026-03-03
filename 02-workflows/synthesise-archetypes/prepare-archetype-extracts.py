@@ -5,7 +5,7 @@ Builds per-participant markdown extract files from consolidated quotes for the
 archetype-writer agent.
 
 Usage:
-    python3 02-workflows/build-dynamic-personas/prepare-archetype-extracts.py
+    python3 02-workflows/synthesise-archetypes/prepare-archetype-extracts.py
 
 Exit codes:
     0 — PASS
@@ -20,9 +20,9 @@ from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-MANIFEST_PATH = ROOT / "04-process" / "build-dynamic-personas" / "p0-prepare" / "manifest.json"
-INPUT_QUOTES_PATH = ROOT / "04-process" / "build-dynamic-personas" / "p4-consolidate-tags" / "consolidated-quotes.csv"
-P5_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p5-synthesize-archetypes"
+MANIFEST_PATH = ROOT / "04-process" / "extract-and-tag-quotes" / "p0-prepare" / "manifest.json"
+INPUT_QUOTES_PATH = ROOT / "04-process" / "extract-and-tag-quotes" / "p4-consolidate-tags" / "consolidated-quotes.csv"
+P5_DIR = ROOT / "04-process" / "synthesise-archetypes"
 EXTRACTS_DIR = P5_DIR / "extracts"
 EXPECTED_PARTICIPANTS_PATH = P5_DIR / "expected-participants.json"
 

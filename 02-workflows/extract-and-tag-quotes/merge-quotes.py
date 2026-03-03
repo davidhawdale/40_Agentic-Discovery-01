@@ -4,7 +4,7 @@ Phase 1: Merge Quotes
 Merges per-participant quote CSVs from quote-parts/ into a single quotes.csv.
 
 Usage:
-    python3 02-workflows/build-dynamic-personas/merge-quotes.py
+    python3 02-workflows/extract-and-tag-quotes/merge-quotes.py
 
 Exit codes:
     0 — PASS (or PASS with warnings)
@@ -18,8 +18,8 @@ from pathlib import Path
 # ── Paths ───────────────────────────────────────────────────────────────────────
 
 ROOT = Path(__file__).resolve().parents[2]
-PARTS_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p1-quote-extraction" / "quote-parts"
-OUTPUT_PATH = ROOT / "04-process" / "build-dynamic-personas" / "p1-quote-extraction" / "quotes.csv"
+PARTS_DIR = ROOT / "04-process" / "extract-and-tag-quotes" / "p1-quote-extraction" / "quote-parts"
+OUTPUT_PATH = ROOT / "04-process" / "extract-and-tag-quotes" / "p1-quote-extraction" / "quotes.csv"
 
 EXPECTED_COLUMNS = [
     "participant_id",

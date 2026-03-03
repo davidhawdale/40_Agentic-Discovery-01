@@ -1,14 +1,14 @@
 {
   "version": "1",
-  "workflow": "build-dynamic-personas",
-  "phase": "p7-role-play",
+  "workflow": "roleplay-personas",
+  "phase": "roleplay",
   "personas": [
     {
       "archetype_number": "1",
       "archetype_name": "Workflow Optimisers",
       "persona_name": "Maya Patel",
       "persona_slug": "maya-patel",
-      "persona_file": "04-process/build-dynamic-personas/p6-create-personas/personas/maya-patel.md",
+      "persona_file": "04-process/build-personas/personas/maya-patel.md",
       "participants": [
         "10",
         "11",
@@ -198,7 +198,7 @@
       "archetype_name": "Guarded Verifiers",
       "persona_name": "Luca Brenner",
       "persona_slug": "luca-brenner",
-      "persona_file": "04-process/build-dynamic-personas/p6-create-personas/personas/luca-brenner.md",
+      "persona_file": "04-process/build-personas/personas/luca-brenner.md",
       "participants": [
         "1",
         "2",
@@ -367,7 +367,7 @@
       "archetype_name": "Creative Builders",
       "persona_name": "Elena Rossi",
       "persona_slug": "elena-rossi",
-      "persona_file": "04-process/build-dynamic-personas/p6-create-personas/personas/elena-rossi.md",
+      "persona_file": "04-process/build-personas/personas/elena-rossi.md",
       "participants": [
         "5",
         "12",
@@ -566,7 +566,7 @@
       "archetype_name": "Relational Co-Pilots",
       "persona_name": "Samira Haddad",
       "persona_slug": "samira-haddad",
-      "persona_file": "04-process/build-dynamic-personas/p6-create-personas/personas/samira-haddad.md",
+      "persona_file": "04-process/build-personas/personas/samira-haddad.md",
       "participants": [
         "3",
         "22",
@@ -702,7 +702,7 @@
       "archetype_name": "Adaptive Strategists",
       "persona_name": "Noah Kim",
       "persona_slug": "noah-kim",
-      "persona_file": "04-process/build-dynamic-personas/p6-create-personas/personas/noah-kim.md",
+      "persona_file": "04-process/build-personas/personas/noah-kim.md",
       "participants": [
         "8",
         "9",

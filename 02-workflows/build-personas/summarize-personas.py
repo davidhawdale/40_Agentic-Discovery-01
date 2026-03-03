@@ -4,14 +4,14 @@ Phase 6: Summarize Personas
 Prints compact counts for Phase 6 human review gate.
 
 Usage:
-    python3 02-workflows/build-dynamic-personas/summarize-personas.py
+    python3 02-workflows/build-personas/summarize-personas.py
 """
 
 import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-P6_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p6-create-personas"
+P6_DIR = ROOT / "04-process" / "build-personas"
 PERSONAS_DIR = P6_DIR / "personas"
 INPUTS_DIR = P6_DIR / "persona-inputs"
 

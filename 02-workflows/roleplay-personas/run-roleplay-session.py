@@ -3,7 +3,7 @@
 Phase 8: Run one role-play session turn from CLI (smoke/helper)
 
 Usage:
-  python3 02-workflows/build-dynamic-personas/run-roleplay-session.py --question "What should our MVP prioritize?"
+  python3 02-workflows/roleplay-personas/run-roleplay-session.py --question "What should our MVP prioritize?"
 """
 
 from __future__ import annotations
@@ -15,14 +15,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "02-workflows" / "build-dynamic-personas"))
+sys.path.insert(0, str(ROOT / "02-workflows" / "roleplay-personas"))
 
 from p8_app import llm  # noqa: E402
 from p8_app.prompting import build_user_prompt, correction_prompt, load_system_prompt  # noqa: E402
 from p8_app.verify import verify_response_text  # noqa: E402
 
-P7_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p7-role-play"
-P8_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p8-roleplay-app"
+P7_DIR = ROOT / "04-process" / "roleplay-personas" / "roleplay"
+P8_DIR = ROOT / "04-process" / "roleplay-personas" / "roleplay-app"
 SESSIONS_DIR = P8_DIR / "sessions"
 LOGS_DIR = P8_DIR / "logs"
 

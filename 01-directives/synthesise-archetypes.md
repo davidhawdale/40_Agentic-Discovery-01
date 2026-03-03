@@ -14,8 +14,8 @@ With quotes extracted and tagged, this workflow identifies the underlying partic
 
 | Input | Location |
 |-------|----------|
-| Consolidated quotes | `04-process/build-dynamic-personas/p4-consolidate-tags/consolidated-quotes.csv` |
-| Transcript manifest | `04-process/build-dynamic-personas/p0-prepare/manifest.json` |
+| Consolidated quotes | `04-process/extract-and-tag-quotes/p4-consolidate-tags/consolidated-quotes.csv` |
+| Transcript manifest | `04-process/extract-and-tag-quotes/p0-prepare/manifest.json` |
 
 > These are produced by the `extract-and-tag-quotes` workflow. Run that workflow first.
 

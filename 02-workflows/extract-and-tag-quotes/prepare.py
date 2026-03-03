@@ -2,10 +2,10 @@
 """
 Phase 0: Prepare
 Scans 03-inputs/interview-transcripts/, validates files, and writes a manifest
-to 04-process/build-dynamic-personas/manifest.json.
+to 04-process/extract-and-tag-quotes/manifest.json.
 
 Usage:
-    python 02-workflows/build-dynamic-personas/prepare.py
+    python 02-workflows/extract-and-tag-quotes/prepare.py
 
 Exit codes:
     0 — PASS
@@ -24,7 +24,7 @@ from typing import Optional
 ROOT = Path(__file__).resolve().parents[2]
 TRANSCRIPTS_DIR = ROOT / "03-inputs" / "interview-transcripts"
 RESEARCH_BRIEF = ROOT / "03-inputs" / "research-brief.md"
-PROCESS_DIR = ROOT / "04-process" / "build-dynamic-personas"
+PROCESS_DIR = ROOT / "04-process" / "extract-and-tag-quotes"
 MANIFEST_PATH = PROCESS_DIR / "p0-prepare" / "manifest.json"
 
 EXPECTED_COUNT = 53

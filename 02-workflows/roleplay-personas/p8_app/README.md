@@ -5,8 +5,8 @@ Local web app for running a five-persona focus-group conversation.
 ## 1) Install dependencies
 
 ```bash
-cd "/Users/david/Library/CloudStorage/GoogleDrive-david.hawdale@hawdale-associates.co.uk/Shared drives/HA Shared GDrive 4TB/Claude/dynamic-personas-from-data"
-python3 -m pip install -r 02-workflows/build-dynamic-personas/p8_app/requirements.txt
+cd "/Users/david/Library/CloudStorage/GoogleDrive-david.hawdale@hawdale-associates.co.uk/Shared drives/HA Shared GDrive 4TB/Claude/agentic_discovery_01"
+python3 -m pip install -r 02-workflows/roleplay-personas/p8_app/requirements.txt
 ```
 
 ## 2) Set OpenAI API key
@@ -26,14 +26,14 @@ export OPENAI_API_KEY="your_key_here"
 ## 3) Prepare role-play pack
 
 ```bash
-python3 02-workflows/build-dynamic-personas/prepare-roleplay-pack.py
-python3 02-workflows/build-dynamic-personas/verify-roleplay-pack.py
+python3 02-workflows/roleplay-personas/prepare-roleplay-pack.py
+python3 02-workflows/roleplay-personas/verify-roleplay-pack.py
 ```
 
 ## 4) Start the app
 
 ```bash
-python3 02-workflows/build-dynamic-personas/run-roleplay-app.py
+python3 02-workflows/roleplay-personas/run-roleplay-app.py
 ```
 
 Open in browser:

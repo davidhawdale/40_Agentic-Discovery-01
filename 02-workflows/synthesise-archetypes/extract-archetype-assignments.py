@@ -4,7 +4,7 @@ Phase 5: Extract Archetype Assignments
 Parses archetypes.md and writes participant-archetype-assignments.csv.
 
 Usage:
-    python3 02-workflows/build-dynamic-personas/extract-archetype-assignments.py
+    python3 02-workflows/synthesise-archetypes/extract-archetype-assignments.py
 
 Exit codes:
     0 — PASS
@@ -17,7 +17,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-P5_DIR = ROOT / "04-process" / "build-dynamic-personas" / "p5-synthesize-archetypes"
+P5_DIR = ROOT / "04-process" / "synthesise-archetypes"
 ARCHETYPES_PATH = P5_DIR / "archetypes.md"
 OUTPUT_PATH = P5_DIR / "participant-archetype-assignments.csv"
 

@@ -1,6 +1,6 @@
 ---
 name: participant-contradiction-checker
-description: Checks a single participant's quotes for contradictions and writes a per-participant CSV. Used in Phase 3 of the build-dynamic-personas workflow.
+description: Checks a single participant's quotes for contradictions and writes a per-participant CSV. Used in Phase 3 of the extract-and-tag-quotes workflow.
 model: sonnet
 ---
 # Agent: participant-contradiction-checker
