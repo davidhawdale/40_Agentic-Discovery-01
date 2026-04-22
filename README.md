@@ -1,70 +1,34 @@
-# Agent Project Framework
+# Agentic Discovery — Personal AI Assistant
 
-A structured template for AI-assisted analytical projects, compatible with Claude Code, OpenAI Codex, and Gemini.
+This project transforms 52 qualitative interview transcripts into interactive research artefacts for a personal AI assistant product. It runs a chain of AI workflows that progressively distil raw interview data into actionable discovery outputs.
 
-## The 3-Layer Architecture
+## What it does
 
-| Layer                   | Role                                                    | Lives in                               |
-| ----------------------- | ------------------------------------------------------- | -------------------------------------- |
-| **Directives**    | Define what to do and why                               | `01-directives/`                     |
-| **Orchestration** | You (the AI) — decide, sequence, handle errors         | `02-workflows/`                      |
-| **Execution**     | Python scripts (deterministic) + sub-agents (judgement) | `02-workflows/`, `.claude/agents/` |
+Starting from interview transcripts, seven workflows run in sequence:
 
-LLMs are probabilistic; business logic needs determinism. This architecture separates the two.
+| # | Workflow | What it produces |
+|---|----------|-----------------|
+| 01 | **Extract and tag quotes** | Tagged, validated quotes and contradiction flags from all transcripts |
+| 02 | **Synthesise archetypes** | Five behavioural archetypes grounded in the quote data |
+| 03 | **Build personas** | Five named, conversational Dynamic Personas backed by transcript evidence |
+| 04 | **Generate MVP document** | A product brief for the AI assistant, built from persona and market research |
+| 05 | **Generate VC pitch** | A one-page investor pitch synthesised from the research |
+| 06 | **Assess MVP by Three Amigos** | A structured review of the MVP brief from UX, PM, and engineering lenses |
+| 07 | **Run focus group** | A simulated focus group session where the personas respond to product concepts |
 
-## Using This Template
+The personas are the core deliverable — they are designed to be queried conversationally so teams can "talk to the research" during ideation, rather than reading static documents.
 
-### One-time setup
+## How to use it
 
-1. On GITHUB, click **Use this template** on GitHub, name your new repo, and clone it
-2. Make a workspace locally, and connect it - `git remote add origin <repository-url>`
-3. Pull the remote files - `git pull`
-4. Run `bash setup.sh`
-5. Run `/new-project` (Claude Code) or follow the `SKILL.md` procedure in `.claude/skills/new-project/` manually which asks for input from the user
-6. Fill in `00-brief/project-brief.md`
-7. Add source data to `03-inputs/`
-8. Run `/add-workflow` to scaffold your first directive and workflow
+Run workflows in Claude Code using `/run-workflow <workflow-name>`. To talk to a persona, ask Claude to load it from `05-outputs/03-build-personas/personas/`.
 
-### Key commands (Claude Code)
+## Project structure
 
-| Command                  | What it does                                     |
-| ------------------------ | ------------------------------------------------ |
-| `/new-project`         | Initialise a fresh clone into a working project  |
-| `/add-workflow`        | Scaffold a new directive and workflow folder     |
-| `/run-workflow <name>` | Run a workflow end-to-end                        |
-| `/status`              | Show which outputs exist and what may be stale   |
-| `/validate-outputs`    | Check output quality without re-running          |
-| `/update-learnings`    | Capture session learnings in orchestration files |
-
-### Environment-specific notes
-
-- **Claude Code** — `.claude/rules/` auto-loads at session start. Use slash commands above.
-- **OpenAI Codex** — Read all files in `.claude/rules/` manually at session start. See `AGENTS.md` for Codex-specific instructions.
-- **Gemini** — Read all files in `.claude/rules/` manually at session start. See `GEMINI.md` for Gemini-specific instructions.
-
-## Directory Structure
-
-| Directory                   | Purpose                                        | Writable?                  |
-| --------------------------- | ---------------------------------------------- | -------------------------- |
-| `00-brief/`               | Project brief and high-level context           | Read-only at runtime       |
-| `01-directives/`          | Thin cover sheets pointing to workflows        | Read-only at runtime       |
-| `02-workflows/`           | Workflow orchestration files and scripts       | Yes                        |
-| `02-workflows/shared/`    | Reusable scripts used by multiple workflows    | Yes                        |
-| `03-inputs/`              | Raw source data                                | **Never write here** |
-| `04-process/`             | Intermediate files (regenerable)               | Yes                        |
-| `05-outputs/`             | Final deliverables                             | Confirm before overwriting |
-| `10-resources/templates/` | Directive and orchestration templates          | Read-only                  |
-| `.claude/agents/`         | Sub-agent definitions                          | Yes                        |
-| `.claude/rules/`          | Operational rules (auto-loaded by Claude Code) | Read-only                  |
-| `.claude/skills/`         | Skill procedures invoked with `/skill-name`  | Read-only                  |
-
-## Environment Variables
-
-Store API keys once in `~/.agent-project.env`. When you run `bash setup.sh`, it will automatically symlink that file as `.env` in your project — no manual copying required.
-
-```bash
-# ~/.agent-project.env
-ANTHROPIC_API_KEY=sk-...
-OPENAI_API_KEY=sk-...
-GOOGLE_API_KEY=...
+```
+00-brief/       Project goals and research context
+01-directives/  One file per workflow — what to do and why
+02-workflows/   Orchestration files and Python scripts for each workflow
+03-inputs/      Raw interview transcripts (read-only)
+04-process/     Intermediate files generated during workflow runs
+05-outputs/     Final deliverables — personas, MVP brief, VC pitch, assessments
 ```
