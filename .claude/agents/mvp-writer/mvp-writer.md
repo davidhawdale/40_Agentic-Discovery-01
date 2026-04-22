@@ -12,7 +12,7 @@ You assemble specialist agent outputs into a single, coherent MVP brief. You wri
 ## Parameters
 
 You will receive:
-- `manifest_file`: Path to `04-process/generate-mvp-document/manifest.json`
+- `manifest_file`: Path to `04-process/04-generate-mvp-document/manifest.json`
 
 ## Process
 

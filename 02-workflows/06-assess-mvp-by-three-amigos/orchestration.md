@@ -1,6 +1,6 @@
 # Assess MVP by Three Amigos
 
-> **Directive workflow** — triggered by user request. See `01-directives/assess-mvp-by-three-amigos.md` for goal, inputs, and acceptance criteria.
+> **Directive workflow** — triggered by user request. See `01-directives/06-assess-mvp-by-three-amigos.md` for goal, inputs, and acceptance criteria.
 
 ## Approach
 
@@ -9,7 +9,7 @@ Create a Claude Code team of three specialist reviewers. Each independently asse
 ## Preconditions
 
 - Required inputs:
-  - `05-outputs/generate-mvp-document/mvp-brief.md`
+  - `05-outputs/04-generate-mvp-document/mvp-brief.md`
   - `00-brief/strategic-research-brief.md`
   - `10-resources/templates/three-amigos-output-template.md`
 - Stop conditions:
@@ -22,9 +22,9 @@ Create a Claude Code team of three specialist reviewers. Each independently asse
 - Goal: Validate prerequisites, create working directories, write manifest.
 - Run: `python3 02-workflows/assess-mvp-by-three-amigos/prepare-three-amigos-inputs.py`
 - Paths:
-  - Creates `04-process/assess-mvp-by-three-amigos/phase1-reviews/`
-  - Creates `04-process/assess-mvp-by-three-amigos/phase2-discussion/`
-  - Writes `04-process/assess-mvp-by-three-amigos/manifest.json`
+  - Creates `04-process/06-assess-mvp-by-three-amigos/phase1-reviews/`
+  - Creates `04-process/06-assess-mvp-by-three-amigos/phase2-discussion/`
+  - Writes `04-process/06-assess-mvp-by-three-amigos/manifest.json`
 - PASS when: Manifest written, all inputs validated, directories created
 - WARN when: N/A
 - FAIL when: Script exits non-zero or manifest not written
@@ -36,11 +36,11 @@ Create a Claude Code team of three specialist reviewers. Each independently asse
 - Run:
   1. `TeamCreate` with team name `three-amigos`
   2. Spawn all three reviewers IN PARALLEL using the Agent tool with `team_name: three-amigos`:
-     - `ux-three-amigos-reviewer` → `04-process/assess-mvp-by-three-amigos/phase1-reviews/desirability-review.md`
-     - `engineer-three-amigos-reviewer` → `04-process/assess-mvp-by-three-amigos/phase1-reviews/feasibility-review.md`
-     - `pm-three-amigos-reviewer` → `04-process/assess-mvp-by-three-amigos/phase1-reviews/viability-review.md`
+     - `ux-three-amigos-reviewer` → `04-process/06-assess-mvp-by-three-amigos/phase1-reviews/desirability-review.md`
+     - `engineer-three-amigos-reviewer` → `04-process/06-assess-mvp-by-three-amigos/phase1-reviews/feasibility-review.md`
+     - `pm-three-amigos-reviewer` → `04-process/06-assess-mvp-by-three-amigos/phase1-reviews/viability-review.md`
 - Input for all three agents:
-  - `manifest_file` — `04-process/assess-mvp-by-three-amigos/manifest.json`
+  - `manifest_file` — `04-process/06-assess-mvp-by-three-amigos/manifest.json`
   - `mode` — `independent`
 - Output: 3 review files in `phase1-reviews/`
 - PASS when: All 3 files exist and are non-empty
@@ -94,7 +94,7 @@ Create a Claude Code team of three specialist reviewers. Each independently asse
   - Record Round 2 messages into `discussion-transcript.md` under `## Round 2`
   - After Round 2, close the discussion: send shutdown_request to all three reviewers
 
-- Output: `04-process/assess-mvp-by-three-amigos/discussion-transcript.md`
+- Output: `04-process/06-assess-mvp-by-three-amigos/discussion-transcript.md`
 - PASS when: Transcript exists, ≥6 messages recorded (≥2 per specialist)
 - WARN when: Fewer than 6 messages — note in transcript header, continue to Phase 3
 - FAIL when: Transcript missing or fewer than 3 messages total
@@ -105,9 +105,9 @@ Create a Claude Code team of three specialist reviewers. Each independently asse
 - Goal: Combine all specialist reviews and the discussion transcript into the final assessment document.
 - Run: `three-amigos-synthesizer` (spawned as a standalone agent, outside the team)
 - Input (passed as parameters):
-  - `manifest_file` — `04-process/assess-mvp-by-three-amigos/manifest.json`
+  - `manifest_file` — `04-process/06-assess-mvp-by-three-amigos/manifest.json`
   - Agent reads `phase1_dir`, `phase2_dir`, `transcript_file`, `template_file`, `output_file` from manifest
-- Output: `05-outputs/assess-mvp-by-three-amigos/mvp-three-amigos-assessment.md`
+- Output: `05-outputs/06-assess-mvp-by-three-amigos/mvp-three-amigos-assessment.md`
 - PASS when: Output file exists and is non-empty
 - WARN when: N/A
 - FAIL when: Output missing or empty
@@ -117,7 +117,7 @@ Create a Claude Code team of three specialist reviewers. Each independently asse
 
 - Goal: Deterministically verify structural and constraint compliance. Clean up the team.
 - Run:
-  1. `python3 02-workflows/assess-mvp-by-three-amigos/verify-three-amigos-output.py --file 05-outputs/assess-mvp-by-three-amigos/mvp-three-amigos-assessment.md --max-words 2500`
+  1. `python3 02-workflows/assess-mvp-by-three-amigos/verify-three-amigos-output.py --file 05-outputs/06-assess-mvp-by-three-amigos/mvp-three-amigos-assessment.md --max-words 2500`
   2. `TeamDelete` (team should already be empty after Phase 2 shutdown; this cleans up the team record)
 - PASS when: All 6 required headings present, word count ≤ 2500, footer present, ≥5 recommendations present, ≤5 recommendations present
 - FAIL when: Verifier returns FAIL
@@ -167,30 +167,30 @@ Create a Claude Code team of three specialist reviewers. Each independently asse
 
 ## Manifest Format
 
-`04-process/assess-mvp-by-three-amigos/manifest.json`:
+`04-process/06-assess-mvp-by-three-amigos/manifest.json`:
 
 - `workflow` — `assess-mvp-by-three-amigos`
 - `created_at` — UTC ISO timestamp
-- `mvp_brief_file` — `05-outputs/generate-mvp-document/mvp-brief.md`
+- `mvp_brief_file` — `05-outputs/04-generate-mvp-document/mvp-brief.md`
 - `strategic_brief_file` — `00-brief/strategic-research-brief.md`
 - `template_file` — `10-resources/templates/three-amigos-output-template.md`
-- `phase1_dir` — `04-process/assess-mvp-by-three-amigos/phase1-reviews/`
-- `phase2_dir` — `04-process/assess-mvp-by-three-amigos/phase2-discussion/`
-- `transcript_file` — `04-process/assess-mvp-by-three-amigos/discussion-transcript.md`
-- `output_file` — `05-outputs/assess-mvp-by-three-amigos/mvp-three-amigos-assessment.md`
+- `phase1_dir` — `04-process/06-assess-mvp-by-three-amigos/phase1-reviews/`
+- `phase2_dir` — `04-process/06-assess-mvp-by-three-amigos/phase2-discussion/`
+- `transcript_file` — `04-process/06-assess-mvp-by-three-amigos/discussion-transcript.md`
+- `output_file` — `05-outputs/06-assess-mvp-by-three-amigos/mvp-three-amigos-assessment.md`
 
 ## Sub-agent Parameters
 
 **Phase 1 reviewers (all three):**
-- `manifest_file` — `04-process/assess-mvp-by-three-amigos/manifest.json`
+- `manifest_file` — `04-process/06-assess-mvp-by-three-amigos/manifest.json`
 - `mode` — `independent`
 
 **Phase 3 synthesizer:**
-- `manifest_file` — `04-process/assess-mvp-by-three-amigos/manifest.json`
+- `manifest_file` — `04-process/06-assess-mvp-by-three-amigos/manifest.json`
 
 ## Discussion Transcript Format
 
-`04-process/assess-mvp-by-three-amigos/discussion-transcript.md`:
+`04-process/06-assess-mvp-by-three-amigos/discussion-transcript.md`:
 
 ```markdown
 # Discussion Transcript
@@ -238,9 +238,9 @@ Create a Claude Code team of three specialist reviewers. Each independently asse
 
 ## Output Promotion
 
-- Phase 1 and Phase 2 review files stay in `04-process/assess-mvp-by-three-amigos/`.
-- Discussion transcript stays in `04-process/assess-mvp-by-three-amigos/`.
-- Final assessment is written directly to `05-outputs/assess-mvp-by-three-amigos/mvp-three-amigos-assessment.md`.
+- Phase 1 and Phase 2 review files stay in `04-process/06-assess-mvp-by-three-amigos/`.
+- Discussion transcript stays in `04-process/06-assess-mvp-by-three-amigos/`.
+- Final assessment is written directly to `05-outputs/06-assess-mvp-by-three-amigos/mvp-three-amigos-assessment.md`.
 - Do not overwrite an existing `05-outputs` deliverable without explicit user confirmation.
 
 ## Completion Checklist (Run-End Acceptance Gate)
@@ -248,9 +248,9 @@ Create a Claude Code team of three specialist reviewers. Each independently asse
 - [ ] Preconditions satisfied
 - [ ] All directive acceptance criteria mapped in traceability table
 - [ ] All mapped checks reached PASS/WARN state
-- [ ] 3 Phase 1 review files exist in `04-process/assess-mvp-by-three-amigos/phase1-reviews/`
+- [ ] 3 Phase 1 review files exist in `04-process/06-assess-mvp-by-three-amigos/phase1-reviews/`
 - [ ] Discussion transcript exists with ≥6 messages
-- [ ] Final deliverable exists at `05-outputs/assess-mvp-by-three-amigos/mvp-three-amigos-assessment.md`
+- [ ] Final deliverable exists at `05-outputs/06-assess-mvp-by-three-amigos/mvp-three-amigos-assessment.md`
 - [ ] Team cleanly shut down (TeamDelete confirmed)
 - [ ] User-facing summary includes word count, tensions count, recommendation count, final status
 - [ ] Run log entry appended

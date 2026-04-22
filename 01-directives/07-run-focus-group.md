@@ -18,7 +18,7 @@ This workflow should help teams evaluate concepts against realistic user perspec
 
 | Input | Location |
 |-------|----------|
-| Persona files | `05-outputs/build-personas/personas/*.md` |
+| Persona files | `05-outputs/03-build-personas/personas/*.md` |
 | Archetype input packs | `04-process/build-personas/persona-inputs/archetype-*.json` |
 | Consolidated quotes | `04-process/extract-and-tag-quotes/p4-consolidate-tags/consolidated-quotes.csv` |
 | Contradictions | `04-process/extract-and-tag-quotes/p3-check-contradictions/contradictions.csv` |
@@ -31,8 +31,8 @@ This workflow should help teams evaluate concepts against realistic user perspec
 
 | Output | Location |
 |--------|----------|
-| Role-play session pack | `05-outputs/run-focus-group/session-pack.json` |
-| Session runbook | `05-outputs/run-focus-group/session-runbook.md` |
+| Role-play session pack | `05-outputs/07-run-focus-group/session-pack.json` |
+| Session runbook | `05-outputs/07-run-focus-group/session-runbook.md` |
 
 ## Out of Scope
 

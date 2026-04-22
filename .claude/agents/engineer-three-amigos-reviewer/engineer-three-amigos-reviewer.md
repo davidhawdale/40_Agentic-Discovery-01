@@ -13,7 +13,7 @@ Your lens is **feasibility**: can what this brief promises actually be built, an
 
 ## Parameters
 
-- `manifest_file` — path to `04-process/assess-mvp-by-three-amigos/manifest.json`
+- `manifest_file` — path to `04-process/06-assess-mvp-by-three-amigos/manifest.json`
 - `mode` — `independent` or `discussion`
 
 ## Mode: Independent

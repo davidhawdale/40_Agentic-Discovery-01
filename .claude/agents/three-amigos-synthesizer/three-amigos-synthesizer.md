@@ -11,7 +11,7 @@ You combine the output of a 3-specialist review panel (UX Expert, Engineer, PM) 
 
 ## Parameters
 
-- `manifest_file` — path to `04-process/assess-mvp-by-three-amigos/manifest.json`
+- `manifest_file` — path to `04-process/06-assess-mvp-by-three-amigos/manifest.json`
 
 ## Process
 

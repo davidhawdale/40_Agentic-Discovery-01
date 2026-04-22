@@ -13,7 +13,7 @@ Your lens is **viability**: is there a real business here, and is the competitiv
 
 ## Parameters
 
-- `manifest_file` — path to `04-process/assess-mvp-by-three-amigos/manifest.json`
+- `manifest_file` — path to `04-process/06-assess-mvp-by-three-amigos/manifest.json`
 - `mode` — `independent` or `discussion`
 
 ## Mode: Independent

@@ -27,7 +27,7 @@ The persona set should help teams make better product decisions by representing 
 
 ## Outputs
 
-The outputs produced: five final persona documents for the archetype set (for example, files under `05-outputs/build-personas/personas/`).
+The outputs produced: five final persona documents for the archetype set (for example, files under `05-outputs/03-build-personas/personas/`).
 
 ## Out of Scope
 

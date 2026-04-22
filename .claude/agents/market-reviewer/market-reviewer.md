@@ -12,7 +12,7 @@ You research the current landscape for personal AI assistants and produce a stru
 ## Parameters
 
 You will receive:
-- `manifest_file`: Path to `04-process/generate-mvp-document/manifest.json`
+- `manifest_file`: Path to `04-process/04-generate-mvp-document/manifest.json`
 
 ## Process
 

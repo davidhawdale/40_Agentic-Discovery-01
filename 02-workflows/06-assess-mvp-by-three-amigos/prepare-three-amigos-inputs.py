@@ -10,14 +10,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 DEFAULTS = {
-    "mvp_brief_file":     "05-outputs/generate-mvp-document/mvp-brief.md",
+    "mvp_brief_file":     "05-outputs/04-generate-mvp-document/mvp-brief.md",
     "strategic_brief_file": "00-brief/strategic-research-brief.md",
     "template_file":      "10-resources/templates/three-amigos-output-template.md",
-    "manifest_file":      "04-process/assess-mvp-by-three-amigos/manifest.json",
-    "phase1_dir":         "04-process/assess-mvp-by-three-amigos/phase1-reviews",
-    "phase2_dir":         "04-process/assess-mvp-by-three-amigos/phase2-discussion",
-    "transcript_file":    "04-process/assess-mvp-by-three-amigos/discussion-transcript.md",
-    "output_file":        "05-outputs/assess-mvp-by-three-amigos/mvp-three-amigos-assessment.md",
+    "manifest_file":      "04-process/06-assess-mvp-by-three-amigos/manifest.json",
+    "phase1_dir":         "04-process/06-assess-mvp-by-three-amigos/phase1-reviews",
+    "phase2_dir":         "04-process/06-assess-mvp-by-three-amigos/phase2-discussion",
+    "transcript_file":    "04-process/06-assess-mvp-by-three-amigos/discussion-transcript.md",
+    "output_file":        "05-outputs/06-assess-mvp-by-three-amigos/mvp-three-amigos-assessment.md",
 }
 
 

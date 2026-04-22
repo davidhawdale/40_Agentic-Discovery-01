@@ -23,7 +23,7 @@ DEFAULT_MAX_WORDS = 2500
 DEFAULT_MAX_RECOMMENDATIONS = 5
 DEFAULT_MIN_TRANSCRIPT_MESSAGES = 6
 
-TRANSCRIPT_PATH = "04-process/assess-mvp-by-three-amigos/discussion-transcript.md"
+TRANSCRIPT_PATH = "04-process/06-assess-mvp-by-three-amigos/discussion-transcript.md"
 
 
 def count_words(text: str) -> int:

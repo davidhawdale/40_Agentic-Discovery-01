@@ -1,6 +1,6 @@
 # Run Focus Group
 
-> **Directive workflow** — triggered by user request. See `01-directives/run-focus-group.md` for goal, inputs, and acceptance criteria.
+> **Directive workflow** — triggered by user request. See `01-directives/07-run-focus-group.md` for goal, inputs, and acceptance criteria.
 
 ## Approach
 
@@ -40,11 +40,11 @@ Using persona files and evidence from upstream workflows, build a deterministic 
   - `00-brief/product-vision.md`
   - `03-inputs/research-brief.md`
 - Output:
-  - `04-process/run-focus-group/focus-group/session-pack.json`
-  - `04-process/run-focus-group/focus-group/panel-system-prompt.md`
-  - `04-process/run-focus-group/focus-group/session-runbook.md`
-  - `04-process/run-focus-group/focus-group/question-template.md`
-  - Optional smoke output in `04-process/run-focus-group/focus-group-app/sessions/*.md`
+  - `04-process/07-run-focus-group/focus-group/session-pack.json`
+  - `04-process/07-run-focus-group/focus-group/panel-system-prompt.md`
+  - `04-process/07-run-focus-group/focus-group/session-runbook.md`
+  - `04-process/07-run-focus-group/focus-group/question-template.md`
+  - Optional smoke output in `04-process/07-run-focus-group/focus-group-app/sessions/*.md`
 - Constraints:
   - Session pack must include exactly 5 personas
   - Persona evidence refs must be present and non-empty
@@ -69,9 +69,9 @@ Using persona files and evidence from upstream workflows, build a deterministic 
 - Trigger:
   - Phase 1 completes and pack artifacts are generated
 - Read:
-  - `04-process/run-focus-group/focus-group/session-pack.json`
-  - `04-process/run-focus-group/focus-group/panel-system-prompt.md`
-  - Optional smoke output in `04-process/run-focus-group/focus-group-app/sessions/`
+  - `04-process/07-run-focus-group/focus-group/session-pack.json`
+  - `04-process/07-run-focus-group/focus-group/panel-system-prompt.md`
+  - Optional smoke output in `04-process/07-run-focus-group/focus-group-app/sessions/`
 - Summarise:
   - Session pack created (YES/NO)
   - Personas in pack (`N/5`)
@@ -94,14 +94,14 @@ Using persona files and evidence from upstream workflows, build a deterministic 
      - `POST /api/session/{session_id}/ask`
   4. If smoke output is captured to file: `python3 02-workflows/run-focus-group/verify-focus-group-response.py --file <response-file>`
 - Input:
-  - `04-process/run-focus-group/focus-group/session-pack.json`
-  - `04-process/run-focus-group/focus-group/panel-system-prompt.md`
+  - `04-process/07-run-focus-group/focus-group/session-pack.json`
+  - `04-process/07-run-focus-group/focus-group/panel-system-prompt.md`
   - Runtime env: `OPENAI_API_KEY` (required for live answers), `OPENAI_MODEL` (optional, default `gpt-4o`)
 - Output:
-  - `04-process/run-focus-group/focus-group-app/app-config.json`
-  - `04-process/run-focus-group/focus-group-app/latest-session.json`
-  - `04-process/run-focus-group/focus-group-app/sessions/*.json`
-  - `04-process/run-focus-group/focus-group-app/logs/app.log`
+  - `04-process/07-run-focus-group/focus-group-app/app-config.json`
+  - `04-process/07-run-focus-group/focus-group-app/latest-session.json`
+  - `04-process/07-run-focus-group/focus-group-app/sessions/*.json`
+  - `04-process/07-run-focus-group/focus-group-app/logs/app.log`
 - Constraints:
   - App URL default: `http://127.0.0.1:8016`
   - Every model response is checked with `verify-focus-group-response` rules
@@ -127,9 +127,9 @@ Using persona files and evidence from upstream workflows, build a deterministic 
 - Trigger:
   - Phase 2 completes and app/session artifacts are available
 - Read:
-  - `04-process/run-focus-group/focus-group-app/app-config.json`
-  - `04-process/run-focus-group/focus-group-app/sessions/`
-  - `04-process/run-focus-group/focus-group-app/logs/app.log`
+  - `04-process/07-run-focus-group/focus-group-app/app-config.json`
+  - `04-process/07-run-focus-group/focus-group-app/sessions/`
+  - `04-process/07-run-focus-group/focus-group-app/logs/app.log`
 - Summarise:
   - App startup status (`PASS/FAIL`)
   - Session pack status (`PASS/FAIL`)
@@ -151,7 +151,7 @@ Use this section for directive workflows to map each directive acceptance criter
 | Persona responses are grounded in the underlying research evidence base. | Phase 1/2 (`verify-focus-group-pack.py` + `verify-focus-group-response.py`) + Human Review Gates | Enforces evidence references in pack and validates response schema/grounding expectations before acceptance. |
 | Persona voices are meaningfully differentiated and suitable for panel-style discussion. | Phase 1 optional smoke + Phase 2 smoke (`verify-focus-group-response.py`) + Human Review Gates | Checks response validity and supports reviewer assessment of differentiated persona behavior. |
 | The runbook provides clear guidance for teams to run repeatable role-play sessions. | Phase 1 outputs + Phase 1 Human Review Gate | Confirms `session-runbook.md` is produced and reviewed as usable guidance. |
-| Outputs are usable for downstream concept evaluation and product conversation. | Phase 2 Human Review Gate + Final Step: Copy Outputs | Confirms operational artifacts and final output promotion to `05-outputs/run-focus-group/`. |
+| Outputs are usable for downstream concept evaluation and product conversation. | Phase 2 Human Review Gate + Final Step: Copy Outputs | Confirms operational artifacts and final output promotion to `05-outputs/07-run-focus-group/`. |
 
 ## Retry Policy
 
@@ -178,21 +178,21 @@ No dedicated sub-agent calls in this workflow.
 ## Output Promotion
 
 - Process artifacts remain under:
-  - `04-process/run-focus-group/focus-group/`
-  - `04-process/run-focus-group/focus-group-app/`
+  - `04-process/07-run-focus-group/focus-group/`
+  - `04-process/07-run-focus-group/focus-group-app/`
 - Final deliverables are promoted to:
-  - `05-outputs/run-focus-group/session-pack.json`
-  - `05-outputs/run-focus-group/session-runbook.md`
-- Do not overwrite existing `05-outputs/run-focus-group/` deliverables without explicit user confirmation.
+  - `05-outputs/07-run-focus-group/session-pack.json`
+  - `05-outputs/07-run-focus-group/session-runbook.md`
+- Do not overwrite existing `05-outputs/07-run-focus-group/` deliverables without explicit user confirmation.
 
 ### Final Step: Copy Outputs
 
-After the user confirms Phase 2 is complete and satisfactory, copy the final deliverables to `05-outputs/run-focus-group/`:
+After the user confirms Phase 2 is complete and satisfactory, copy the final deliverables to `05-outputs/07-run-focus-group/`:
 
 ```bash
-mkdir -p 05-outputs/run-focus-group
-cp 04-process/run-focus-group/focus-group/session-pack.json 05-outputs/run-focus-group/session-pack.json
-cp 04-process/run-focus-group/focus-group/session-runbook.md 05-outputs/run-focus-group/session-runbook.md
+mkdir -p 05-outputs/07-run-focus-group
+cp 04-process/07-run-focus-group/focus-group/session-pack.json 05-outputs/07-run-focus-group/session-pack.json
+cp 04-process/07-run-focus-group/focus-group/session-runbook.md 05-outputs/07-run-focus-group/session-runbook.md
 ```
 
 Confirm files are present, then report workflow complete.
@@ -202,7 +202,7 @@ Confirm files are present, then report workflow complete.
 - [ ] Preconditions satisfied (or explicitly resolved)
 - [ ] All directive acceptance criteria are mapped in traceability table
 - [ ] All mapped checks reached required PASS/WARN state
-- [ ] Final deliverables exist at expected `05-outputs/run-focus-group/` paths
+- [ ] Final deliverables exist at expected `05-outputs/07-run-focus-group/` paths
 - [ ] User-facing summary includes counts, issues, and final status
 - [ ] Run log entry appended (if workflow logging is enabled)
 

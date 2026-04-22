@@ -1,6 +1,6 @@
 # Generate MVP Document
 
-> **Directive workflow** — triggered by user request. See `01-directives/generate-mvp-document.md` for goal, inputs, and acceptance criteria.
+> **Directive workflow** — triggered by user request. See `01-directives/04-generate-mvp-document.md` for goal, inputs, and acceptance criteria.
 
 ## Approach
 
@@ -9,9 +9,9 @@ Run four specialist agents in two parallel phases to produce structured sections
 ## Preconditions
 
 - Required inputs:
-  - `05-outputs/generate-vc-pitch/vc-pitch-one-pager.md`
+  - `05-outputs/05-generate-vc-pitch/vc-pitch-one-pager.md`
   - `05-outputs/synthesise-archetypes/archetypes.md`
-  - `05-outputs/build-personas/personas/*.md` (at least one file)
+  - `05-outputs/03-build-personas/personas/*.md` (at least one file)
   - `00-brief/strategic-research-brief.md`
   - `10-resources/templates/mvp-brief-template.md`
 - Stop conditions:
@@ -26,7 +26,7 @@ Run four specialist agents in two parallel phases to produce structured sections
 - Run:
   1. `python3 02-workflows/generate-mvp-document/prepare-mvp-inputs.py`
 - Output:
-  - `04-process/generate-mvp-document/manifest.json`
+  - `04-process/04-generate-mvp-document/manifest.json`
 - PASS when:
   - Manifest written, all inputs validated
 - FAIL when:
@@ -38,11 +38,11 @@ Run four specialist agents in two parallel phases to produce structured sections
 
 - Goal: Produce three independent sections concurrently.
 - Run simultaneously:
-  1. `market-reviewer` → `04-process/generate-mvp-document/market-review.md`
-  2. `ux-architect` → `04-process/generate-mvp-document/target-user.md`
-  3. `staff-engineer` → `04-process/generate-mvp-document/risks-constraints.md`
+  1. `market-reviewer` → `04-process/04-generate-mvp-document/market-review.md`
+  2. `ux-architect` → `04-process/04-generate-mvp-document/target-user.md`
+  3. `staff-engineer` → `04-process/04-generate-mvp-document/risks-constraints.md`
 - Input for all three:
-  - `04-process/generate-mvp-document/manifest.json`
+  - `04-process/04-generate-mvp-document/manifest.json`
 - PASS when:
   - All three output files exist and are non-empty
 - FAIL when:
@@ -54,9 +54,9 @@ Run four specialist agents in two parallel phases to produce structured sections
 
 - Goal: Assess revenue opportunity, using the market review from Phase 2.
 - Run:
-  1. `business-opportunity` → `04-process/generate-mvp-document/business-opportunity.md`
+  1. `business-opportunity` → `04-process/04-generate-mvp-document/business-opportunity.md`
 - Input:
-  - `04-process/generate-mvp-document/manifest.json`
+  - `04-process/04-generate-mvp-document/manifest.json`
   - Reads `market-review.md` internally (path from manifest)
 - PASS when:
   - Output file exists and is non-empty
@@ -69,9 +69,9 @@ Run four specialist agents in two parallel phases to produce structured sections
 
 - Goal: Assemble all sections into the final document.
 - Run:
-  1. `mvp-writer` → `05-outputs/generate-mvp-document/mvp-brief.md`
+  1. `mvp-writer` → `05-outputs/04-generate-mvp-document/mvp-brief.md`
 - Input:
-  - `04-process/generate-mvp-document/manifest.json`
+  - `04-process/04-generate-mvp-document/manifest.json`
   - Reads all four section files and the template internally
 - PASS when:
   - Output file exists and is non-empty
@@ -84,7 +84,7 @@ Run four specialist agents in two parallel phases to produce structured sections
 
 - Goal: Deterministically verify structural and constraint compliance.
 - Run:
-  1. `python3 02-workflows/generate-mvp-document/verify-mvp-output.py --file 05-outputs/generate-mvp-document/mvp-brief.md --max-words 2500`
+  1. `python3 02-workflows/generate-mvp-document/verify-mvp-output.py --file 05-outputs/04-generate-mvp-document/mvp-brief.md --max-words 2500`
 - PASS when:
   - All 7 headings present, word count ≤ 2500, footer present
 - FAIL when:
@@ -134,7 +134,7 @@ Run four specialist agents in two parallel phases to produce structured sections
 
 ## Manifest Format
 
-`04-process/generate-mvp-document/manifest.json`:
+`04-process/04-generate-mvp-document/manifest.json`:
 
 - `workflow` — `generate-mvp-document`
 - `created_at` — UTC ISO timestamp
@@ -152,12 +152,12 @@ Run four specialist agents in two parallel phases to produce structured sections
 ## Sub-agent Parameters
 
 All agents receive:
-- `manifest_file` — `04-process/generate-mvp-document/manifest.json`
+- `manifest_file` — `04-process/04-generate-mvp-document/manifest.json`
 
 ## Output Promotion
 
-- Section files stay in `04-process/generate-mvp-document/`.
-- Final deliverable is written directly to `05-outputs/generate-mvp-document/mvp-brief.md`.
+- Section files stay in `04-process/04-generate-mvp-document/`.
+- Final deliverable is written directly to `05-outputs/04-generate-mvp-document/mvp-brief.md`.
 - Do not overwrite an existing `05-outputs` deliverable without explicit user confirmation.
 
 ## Completion Checklist
@@ -165,7 +165,7 @@ All agents receive:
 - [ ] Preconditions satisfied
 - [ ] All directive acceptance criteria mapped in traceability table
 - [ ] All mapped checks reached PASS/WARN state
-- [ ] Final deliverable exists at `05-outputs/generate-mvp-document/mvp-brief.md`
+- [ ] Final deliverable exists at `05-outputs/04-generate-mvp-document/mvp-brief.md`
 - [ ] User-facing summary includes word count, experiments selected, and final status
 - [ ] Run log entry appended
 

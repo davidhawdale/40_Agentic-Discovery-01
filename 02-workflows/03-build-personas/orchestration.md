@@ -99,7 +99,7 @@ Use this section for directive workflows to map each directive acceptance criter
 | Each persona is clearly grounded in source evidence and reflects its assigned archetype. | Phase 1 (`verify-personas.py`) + Phase 1 Human Review Gate | Structural verification plus reviewer spot-check of evidence grounding and archetype fidelity. |
 | The persona set is diverse enough to represent materially different user profiles and needs. | Phase 1 (`verify-persona-diversity.py`) | Applies set-level diversity validation against project diversity guidance. |
 | Outputs are suitable for downstream product discussion and decision-making. | Phase 1 (`summarize-personas.py`) + Phase 1 Human Review Gate | Summarized outputs and human review confirm readability and practical discussion utility. |
-| The deliverables are saved to the expected final output location for this workflow. | Final Step: Copy Outputs | Copies persona files to `05-outputs/build-personas/personas/` and confirms file presence. |
+| The deliverables are saved to the expected final output location for this workflow. | Final Step: Copy Outputs | Copies persona files to `05-outputs/03-build-personas/personas/` and confirms file presence. |
 
 ## Retry Policy
 
@@ -130,16 +130,16 @@ No workflow manifest used.
 ## Output Promotion
 
 - Process artifacts stay in `04-process/build-personas/`, including `04-process/build-personas/personas/*.md`.
-- Final deliverables are copied to `05-outputs/build-personas/personas/*.md`.
-- Do not overwrite existing `05-outputs/build-personas/` deliverables without explicit user confirmation.
+- Final deliverables are copied to `05-outputs/03-build-personas/personas/*.md`.
+- Do not overwrite existing `05-outputs/03-build-personas/` deliverables without explicit user confirmation.
 
 ### Final Step: Copy Outputs
 
-After the user confirms Phase 1 is complete and satisfactory, copy the final deliverables to `05-outputs/build-personas/`:
+After the user confirms Phase 1 is complete and satisfactory, copy the final deliverables to `05-outputs/03-build-personas/`:
 
 ```bash
-mkdir -p 05-outputs/build-personas/personas
-cp 04-process/build-personas/personas/*.md 05-outputs/build-personas/personas/
+mkdir -p 05-outputs/03-build-personas/personas
+cp 04-process/build-personas/personas/*.md 05-outputs/03-build-personas/personas/
 ```
 
 Confirm files are present, then report workflow complete.
@@ -151,7 +151,7 @@ Confirm files are present, then report workflow complete.
 - [ ] Preconditions satisfied (or explicitly resolved)
 - [ ] All directive acceptance criteria are mapped in traceability table
 - [ ] All mapped checks reached required PASS/WARN state
-- [ ] Final deliverables exist at expected `05-outputs/build-personas/` paths
+- [ ] Final deliverables exist at expected `05-outputs/03-build-personas/` paths
 - [ ] User-facing summary includes counts, issues, and final status
 - [ ] Run log entry appended (if workflow logging is enabled)
 

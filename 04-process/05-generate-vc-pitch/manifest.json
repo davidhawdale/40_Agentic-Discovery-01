@@ -4,7 +4,7 @@
   "extracts_dir": "04-process/synthesise-archetypes/extracts",
   "brief_file": "00-brief/strategic-research-brief.md",
   "template_file": "10-resources/templates/vc-pitch-output-template.md",
-  "output_file": "05-outputs/generate-vc-pitch/vc-pitch-one-pager.md",
+  "output_file": "05-outputs/05-generate-vc-pitch/vc-pitch-one-pager.md",
   "files": [
     "04-process/synthesise-archetypes/extracts/1.md",
     "04-process/synthesise-archetypes/extracts/10.md",

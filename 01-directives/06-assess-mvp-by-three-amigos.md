@@ -6,7 +6,7 @@ Stress-test the MVP brief by assembling a **team** of three specialist agents �
 
 ## Context
 
-The MVP brief (`05-outputs/generate-mvp-document/mvp-brief.md`) synthesises interview research and market analysis into a focused product brief. A document this condensed inevitably makes trade-offs: it emphasises some things and glosses over others. This workflow catches those gaps before resources are committed to building.
+The MVP brief (`05-outputs/04-generate-mvp-document/mvp-brief.md`) synthesises interview research and market analysis into a focused product brief. A document this condensed inevitably makes trade-offs: it emphasises some things and glosses over others. This workflow catches those gaps before resources are committed to building.
 
 The review uses the **DVF framework** (Desirability, Feasibility, Viability) — a standard product assessment lens:
 
@@ -32,16 +32,16 @@ The workflow uses the Claude Code Teams system (`TeamCreate`, `SendMessage`) so 
 
 | Input | Location | Notes |
 |-------|----------|-------|
-| MVP Brief | `05-outputs/generate-mvp-document/mvp-brief.md` | Must exist. Generate with `generate-mvp-document` workflow if missing. |
+| MVP Brief | `05-outputs/04-generate-mvp-document/mvp-brief.md` | Must exist. Generate with `generate-mvp-document` workflow if missing. |
 | Strategic Research Brief | `00-brief/strategic-research-brief.md` | Provides the research context and success criteria the brief should serve. |
 
 ## Outputs
 
 | Output | Location |
 |--------|----------|
-| Final assessment | `05-outputs/assess-mvp-by-three-amigos/mvp-three-amigos-assessment.md` |
+| Final assessment | `05-outputs/06-assess-mvp-by-three-amigos/mvp-three-amigos-assessment.md` |
 
-*The discussion transcript (`04-process/assess-mvp-by-three-amigos/discussion-transcript.md`) is a process artifact and is not promoted to `05-outputs/`.*
+*The discussion transcript (`04-process/06-assess-mvp-by-three-amigos/discussion-transcript.md`) is a process artifact and is not promoted to `05-outputs/`.*
 
 ## Out of Scope
 
@@ -67,7 +67,7 @@ The output is complete when **all** of the following are true:
 1. Three independent specialist reviews exist (one each for Desirability, Feasibility, Viability)
 2. A discussion transcript exists capturing the full Phase 2 exchange between all three specialists
 3. The transcript contains genuine back-and-forth — not just three monologues
-4. Final synthesis document at `05-outputs/assess-mvp-by-three-amigos/mvp-three-amigos-assessment.md` follows the output template
+4. Final synthesis document at `05-outputs/06-assess-mvp-by-three-amigos/mvp-three-amigos-assessment.md` follows the output template
 5. Final document is maximum 5 pages (~2,500 words)
 6. Written in bullet points and short sentences throughout — no walls of prose
 7. Cross-Cutting Tensions section identifies genuine disagreements between the three lenses
