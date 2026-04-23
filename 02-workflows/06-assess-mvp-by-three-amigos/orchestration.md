@@ -9,7 +9,7 @@ Create a Claude Code team of three specialist reviewers. Each independently asse
 ## Preconditions
 
 - Required inputs:
-  - `05-outputs/04-generate-mvp-document/mvp-brief.md`
+  - `05-outputs/05-generate-mvp-document/mvp-brief.md`
   - `00-brief/strategic-research-brief.md`
   - `10-resources/templates/three-amigos-output-template.md`
 - Stop conditions:
@@ -171,7 +171,7 @@ Create a Claude Code team of three specialist reviewers. Each independently asse
 
 - `workflow` — `assess-mvp-by-three-amigos`
 - `created_at` — UTC ISO timestamp
-- `mvp_brief_file` — `05-outputs/04-generate-mvp-document/mvp-brief.md`
+- `mvp_brief_file` — `05-outputs/05-generate-mvp-document/mvp-brief.md`
 - `strategic_brief_file` — `00-brief/strategic-research-brief.md`
 - `template_file` — `10-resources/templates/three-amigos-output-template.md`
 - `phase1_dir` — `04-process/06-assess-mvp-by-three-amigos/phase1-reviews/`

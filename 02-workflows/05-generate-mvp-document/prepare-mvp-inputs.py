@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Prepare inputs for the generate-mvp-document workflow.
-Validates prerequisites and writes the manifest to 04-process/04-generate-mvp-document/manifest.json.
+Validates prerequisites and writes the manifest to 04-process/05-generate-mvp-document/manifest.json.
 """
 
 import json
@@ -15,18 +15,18 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 
 DEFAULTS = {
-    "vc_pitch_file":   "05-outputs/05-generate-vc-pitch/vc-pitch-one-pager.md",
+    "vc_pitch_file":   "05-outputs/04-generate-vc-pitch/vc-pitch-one-pager.md",
     "archetypes_file": "05-outputs/synthesise-archetypes/archetypes.md",
     "personas_dir":    "05-outputs/03-build-personas/personas",
     "brief_file":      "00-brief/strategic-research-brief.md",
     "template_file":   "10-resources/templates/mvp-brief-template.md",
-    "manifest_file":   "04-process/04-generate-mvp-document/manifest.json",
-    "output_file":     "05-outputs/04-generate-mvp-document/mvp-brief.md",
+    "manifest_file":   "04-process/05-generate-mvp-document/manifest.json",
+    "output_file":     "05-outputs/05-generate-mvp-document/mvp-brief.md",
     # Section process files (written by specialist agents)
-    "market_review_file":  "04-process/04-generate-mvp-document/market-review.md",
-    "target_user_file":    "04-process/04-generate-mvp-document/target-user.md",
-    "risks_file":          "04-process/04-generate-mvp-document/risks-constraints.md",
-    "opportunity_file":    "04-process/04-generate-mvp-document/business-opportunity.md",
+    "market_review_file":  "04-process/05-generate-mvp-document/market-review.md",
+    "target_user_file":    "04-process/05-generate-mvp-document/target-user.md",
+    "risks_file":          "04-process/05-generate-mvp-document/risks-constraints.md",
+    "opportunity_file":    "04-process/05-generate-mvp-document/business-opportunity.md",
 }
 
 

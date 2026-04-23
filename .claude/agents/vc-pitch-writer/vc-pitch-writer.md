@@ -20,7 +20,7 @@ You distill user research extracts into a one-page VC pitch narrative — concis
 ## Parameters
 
 You will receive:
-- `manifest_file`: Path to `04-process/05-generate-vc-pitch/manifest.json`
+- `manifest_file`: Path to `04-process/04-generate-vc-pitch/manifest.json`
 
 ## Writing Rules
 

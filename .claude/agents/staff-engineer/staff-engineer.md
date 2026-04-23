@@ -12,7 +12,7 @@ You review the product vision and user research and identify the highest-priorit
 ## Parameters
 
 You will receive:
-- `manifest_file`: Path to `04-process/04-generate-mvp-document/manifest.json`
+- `manifest_file`: Path to `04-process/05-generate-mvp-document/manifest.json`
 
 ## Process
 

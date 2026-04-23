@@ -18,7 +18,7 @@ The deliverable should give a product team enough to act: a clear problem to sol
 
 | Input | Location |
 |-------|----------|
-| VC pitch one-pager | `05-outputs/05-generate-vc-pitch/vc-pitch-one-pager.md` |
+| VC pitch one-pager | `05-outputs/04-generate-vc-pitch/vc-pitch-one-pager.md` |
 | Participant archetypes | `05-outputs/synthesise-archetypes/archetypes.md` |
 | Personas | `05-outputs/03-build-personas/personas/*.md` |
 | Strategic research brief | `00-brief/strategic-research-brief.md` |
@@ -30,7 +30,7 @@ The deliverable should give a product team enough to act: a clear problem to sol
 
 | Output | Location |
 |--------|----------|
-| MVP brief | `05-outputs/04-generate-mvp-document/mvp-brief.md` |
+| MVP brief | `05-outputs/05-generate-mvp-document/mvp-brief.md` |
 
 ## Out of Scope
 

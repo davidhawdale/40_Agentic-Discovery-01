@@ -27,7 +27,7 @@ The deliverable should help a VC audience quickly understand why this opportunit
 
 | Output | Location |
 |--------|----------|
-| VC pitch one-pager | `05-outputs/05-generate-vc-pitch/vc-pitch-one-pager.md` |
+| VC pitch one-pager | `05-outputs/04-generate-vc-pitch/vc-pitch-one-pager.md` |
 
 ## Out of Scope
 

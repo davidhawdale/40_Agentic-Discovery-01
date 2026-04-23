@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 DEFAULTS = {
-    "mvp_brief_file":     "05-outputs/04-generate-mvp-document/mvp-brief.md",
+    "mvp_brief_file":     "05-outputs/05-generate-mvp-document/mvp-brief.md",
     "strategic_brief_file": "00-brief/strategic-research-brief.md",
     "template_file":      "10-resources/templates/three-amigos-output-template.md",
     "manifest_file":      "04-process/06-assess-mvp-by-three-amigos/manifest.json",

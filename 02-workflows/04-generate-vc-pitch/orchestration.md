@@ -1,6 +1,6 @@
 # Analyse by VC Pitch
 
-> **Directive workflow** — triggered by user request. See `01-directives/05-generate-vc-pitch.md` for goal, inputs, and acceptance criteria.
+> **Directive workflow** — triggered by user request. See `01-directives/04-generate-vc-pitch.md` for goal, inputs, and acceptance criteria.
 
 ## Approach
 
@@ -32,7 +32,7 @@ Build a VC-oriented one-pager from existing participant extracts: prepare determ
   - `04-process/synthesise-archetypes/extracts/*.md`
   - `10-resources/templates/vc-pitch-output-template.md`
 - Output:
-  - `04-process/05-generate-vc-pitch/manifest.json`
+  - `04-process/04-generate-vc-pitch/manifest.json`
 - PASS when:
   - Manifest is written with non-zero extract count
 - WARN when:
@@ -48,9 +48,9 @@ Build a VC-oriented one-pager from existing participant extracts: prepare determ
 - Run:
   1. `vc-pitch-writer`
 - Input:
-  - `04-process/05-generate-vc-pitch/manifest.json`
+  - `04-process/04-generate-vc-pitch/manifest.json`
 - Output:
-  - `05-outputs/05-generate-vc-pitch/vc-pitch-one-pager.md`
+  - `05-outputs/04-generate-vc-pitch/vc-pitch-one-pager.md`
 - PASS when:
   - Output file exists and is non-empty
 - WARN when:
@@ -64,9 +64,9 @@ Build a VC-oriented one-pager from existing participant extracts: prepare determ
 
 - Goal: Deterministically verify structural and constraint compliance.
 - Run:
-  1. `python3 02-workflows/generate-vc-pitch/verify-vc-pitch-output.py --file 05-outputs/05-generate-vc-pitch/vc-pitch-one-pager.md --extracts-dir 04-process/synthesise-archetypes/extracts --max-words 600`
+  1. `python3 02-workflows/generate-vc-pitch/verify-vc-pitch-output.py --file 05-outputs/04-generate-vc-pitch/vc-pitch-one-pager.md --extracts-dir 04-process/synthesise-archetypes/extracts --max-words 600`
 - Input:
-  - `05-outputs/05-generate-vc-pitch/vc-pitch-one-pager.md`
+  - `05-outputs/04-generate-vc-pitch/vc-pitch-one-pager.md`
   - `04-process/synthesise-archetypes/extracts/*.md`
 - Output:
   - Verification report in console (PASS/FAIL + checks)
@@ -85,7 +85,7 @@ Build a VC-oriented one-pager from existing participant extracts: prepare determ
 
 - Trigger: Phase 3 returns PASS
 - Read:
-  - `05-outputs/05-generate-vc-pitch/vc-pitch-one-pager.md`
+  - `05-outputs/04-generate-vc-pitch/vc-pitch-one-pager.md`
   - Phase 3 verifier output summary
 - Summarise:
   - Word count result
@@ -123,7 +123,7 @@ Use this section for directive workflows to map each directive acceptance criter
 
 ## Manifest Format
 
-`04-process/05-generate-vc-pitch/manifest.json`:
+`04-process/04-generate-vc-pitch/manifest.json`:
 
 - `workflow` — `generate-vc-pitch`
 - `created_at` — UTC ISO timestamp
@@ -138,24 +138,24 @@ Use this section for directive workflows to map each directive acceptance criter
 
 `vc-pitch-writer`:
 
-- `manifest_file` — `04-process/05-generate-vc-pitch/manifest.json`
+- `manifest_file` — `04-process/04-generate-vc-pitch/manifest.json`
 
 ## Output Promotion
 
-- Process artifacts stay in `04-process/05-generate-vc-pitch/`.
-- Final deliverables are copied/promoted to `05-outputs/05-generate-vc-pitch/`.
+- Process artifacts stay in `04-process/04-generate-vc-pitch/`.
+- Final deliverables are copied/promoted to `05-outputs/04-generate-vc-pitch/`.
 - Do not overwrite existing `05-outputs` deliverables without explicit user confirmation.
 
 ### Final Step: Copy Outputs
 
-After the user confirms the final workflow phase is complete and satisfactory, copy final deliverables to `05-outputs/05-generate-vc-pitch/` and confirm files are present before reporting completion.
+After the user confirms the final workflow phase is complete and satisfactory, copy final deliverables to `05-outputs/04-generate-vc-pitch/` and confirm files are present before reporting completion.
 
 ## Completion Checklist (Run-End Acceptance Gate)
 
 - [ ] Preconditions satisfied (or explicitly resolved)
 - [ ] All directive acceptance criteria are mapped in traceability table
 - [ ] All mapped checks reached required PASS/WARN state
-- [ ] Final deliverable exists at `05-outputs/05-generate-vc-pitch/vc-pitch-one-pager.md`
+- [ ] Final deliverable exists at `05-outputs/04-generate-vc-pitch/vc-pitch-one-pager.md`
 - [ ] User-facing summary includes counts, issues, and final status
 - [ ] Run log entry appended (if workflow logging is enabled)
 

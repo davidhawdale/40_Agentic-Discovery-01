@@ -6,7 +6,7 @@ Stress-test the MVP brief by assembling a **team** of three specialist agents â€
 
 ## Context
 
-The MVP brief (`05-outputs/04-generate-mvp-document/mvp-brief.md`) synthesises interview research and market analysis into a focused product brief. A document this condensed inevitably makes trade-offs: it emphasises some things and glosses over others. This workflow catches those gaps before resources are committed to building.
+The MVP brief (`05-outputs/05-generate-mvp-document/mvp-brief.md`) synthesises interview research and market analysis into a focused product brief. A document this condensed inevitably makes trade-offs: it emphasises some things and glosses over others. This workflow catches those gaps before resources are committed to building.
 
 The review uses the **DVF framework** (Desirability, Feasibility, Viability) â€” a standard product assessment lens:
 
@@ -32,7 +32,7 @@ The workflow uses the Claude Code Teams system (`TeamCreate`, `SendMessage`) so 
 
 | Input | Location | Notes |
 |-------|----------|-------|
-| MVP Brief | `05-outputs/04-generate-mvp-document/mvp-brief.md` | Must exist. Generate with `generate-mvp-document` workflow if missing. |
+| MVP Brief | `05-outputs/05-generate-mvp-document/mvp-brief.md` | Must exist. Generate with `generate-mvp-document` workflow if missing. |
 | Strategic Research Brief | `00-brief/strategic-research-brief.md` | Provides the research context and success criteria the brief should serve. |
 
 ## Outputs
